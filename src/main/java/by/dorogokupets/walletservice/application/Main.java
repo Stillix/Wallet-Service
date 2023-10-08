@@ -1,4 +1,4 @@
-package by.dorogokupets.wallet.application;
+package by.dorogokupets.walletservice.application;
 
 public class Main {
    public static void main(String[] args) {

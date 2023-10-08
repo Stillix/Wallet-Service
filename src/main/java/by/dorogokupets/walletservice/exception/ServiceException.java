@@ -1,4 +1,4 @@
-package by.dorogokupets.wallet.exception;
+package by.dorogokupets.walletservice.exception;
 
 public class ServiceException extends Exception{
    public ServiceException() {

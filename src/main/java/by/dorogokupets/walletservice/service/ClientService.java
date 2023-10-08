@@ -1,7 +1,7 @@
-package by.dorogokupets.wallet.service;
+package by.dorogokupets.walletservice.service;
 
-import by.dorogokupets.wallet.entity.Client;
-import by.dorogokupets.wallet.entity.Transaction;
+import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.Transaction;
 
 import java.math.BigDecimal;
 import java.util.List;

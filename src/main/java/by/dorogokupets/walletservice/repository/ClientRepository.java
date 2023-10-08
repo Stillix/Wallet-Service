@@ -1,6 +1,6 @@
-package by.dorogokupets.wallet.repository;
+package by.dorogokupets.walletservice.repository;
 
-import by.dorogokupets.wallet.entity.Client;
+import by.dorogokupets.walletservice.entity.Client;
 
 public interface ClientRepository {
 

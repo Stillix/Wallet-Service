@@ -1,10 +1,10 @@
-package by.dorogokupets.wallet.service.impl;
+package by.dorogokupets.walletservice.service.impl;
 
-import by.dorogokupets.wallet.entity.Client;
-import by.dorogokupets.wallet.entity.Transaction;
-import by.dorogokupets.wallet.entity.TransactionType;
-import by.dorogokupets.wallet.repository.ClientRepository;
-import by.dorogokupets.wallet.service.ClientService;
+import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.Transaction;
+import by.dorogokupets.walletservice.entity.TransactionType;
+import by.dorogokupets.walletservice.repository.ClientRepository;
+import by.dorogokupets.walletservice.service.ClientService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
