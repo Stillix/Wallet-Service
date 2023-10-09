@@ -1,6 +1,6 @@
 package by.dorogokupets.walletservice.infrastructure.in;
 
-import by.dorogokupets.walletservice.exception.InputException;
+
 
 import java.util.Scanner;
 

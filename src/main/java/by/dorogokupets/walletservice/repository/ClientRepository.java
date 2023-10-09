@@ -6,7 +6,7 @@ public interface ClientRepository {
 
 		boolean register(Client client);
 
-		Client getClientByLogin(String login);
+		Client findClientByLogin(String login);
 
 		boolean authenticate(String login, String password);
 

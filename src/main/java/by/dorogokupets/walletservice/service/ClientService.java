@@ -22,6 +22,6 @@ public interface ClientService {
 
    boolean credit(Client client, BigDecimal amount);
 
-   List<Transaction> getClientTransactionHistory(Client client);
+
 
 }
