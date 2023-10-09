@@ -4,10 +4,10 @@ import by.dorogokupets.walletservice.entity.Client;
 
 public interface ClientRepository {
 
-   public boolean registerClient(String login, String password, String firstName, String lastName);
+		boolean register(Client client);
 
-   public Client getClientByLogin(String login);
+		Client getClientByLogin(String login);
 
-   public boolean authenticate(String login, String password);
+		boolean authenticate(String login, String password);
 
 }
