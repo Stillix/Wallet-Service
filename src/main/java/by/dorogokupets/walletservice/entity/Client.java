@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- *
+ * A class representing a client's account.
  */
 public class Client {
     private String clientFirstName;
