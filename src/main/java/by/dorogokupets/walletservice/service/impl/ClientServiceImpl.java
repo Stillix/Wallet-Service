@@ -17,7 +17,7 @@ public class ClientServiceImpl implements ClientService {
     private ConsoleInput consoleInput;
 
     private final List<Transaction> transactions = new ArrayList<>();
-    ClientRepository clientRepository = new ClientRepositoryImpl();
+    private ClientRepository clientRepository = new ClientRepositoryImpl();
 
 
     public ClientServiceImpl() {

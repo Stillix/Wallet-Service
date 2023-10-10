@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface TransactionRepository {
     /**
-     * Add transaction in repository
+     * Add transaction to repository
      *
      * @param transaction
-     * @return Client
+     * @return Transaction
      */
     Transaction add(Transaction transaction);
 
