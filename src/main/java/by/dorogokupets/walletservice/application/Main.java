@@ -1,9 +1,8 @@
 package by.dorogokupets.walletservice.application;
 
 import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
-import by.dorogokupets.walletservice.infrastructure.allmenu.DisplayMenu;
-import by.dorogokupets.walletservice.infrastructure.allmenu.DisplayMenuImpl;
+import by.dorogokupets.walletservice.infrastructure.menu.DisplayMenu;
+import by.dorogokupets.walletservice.infrastructure.menu.impl.DisplayMenuImpl;
 import by.dorogokupets.walletservice.infrastructure.in.ConsoleInput;
 import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.service.TransactionService;
@@ -17,50 +16,42 @@ import java.util.UUID;
 public class Main {
 
     public static void main(String[] args) {
-        ClientService clientService = new ClientServiceImpl();
+        ConsoleInput consoleInput = new ConsoleInput();
+        ClientService clientService = new ClientServiceImpl(consoleInput);
         TransactionService transactionService = new TransactionServiceImpl();
 
-        ConsoleInput consoleInput = new ConsoleInput();
+
         DisplayMenu displayMenu = new DisplayMenuImpl();
-        String login = null;
+        Client currentClient = null;
 
-        boolean isRunning = true;
-        while (isRunning) {
-            displayMenu.showMainMenu();
-            int choice = consoleInput.readInt();
-            switch (choice) {
-                case 1:
-                    boolean authorization = clientService.authenticate();
-                    if (authorization) {
-                        System.out.println("Вход выполнен успешно.");
-                        isRunning = false;
-                    } else {
-                        System.out.println("Неверный логин или пароль.");
-                    }
-                    break;
-                case 2:
-                    System.out.print("Введите логин: ");
-                    login = consoleInput.readString();
-                    clientService.register(login);
-                    break;
-                default:
-                    System.out.println("Пожалуйста, выберите правильный пункт меню.");
-                    break;
+        while (true) {
+            while (currentClient == null) {
+                displayMenu.showMainMenu();
+                int choice = consoleInput.readInt();
+                switch (choice) {
+                    case 1:
+                        currentClient = clientService.authenticate();
+                        break;
+                    case 2:
+                        clientService.register();
+                        break;
+                    case 3:
+                        System.exit(1);
+                        break;
+                    default:
+                        System.out.println("Пожалуйста, выберите правильный пункт меню.");
+                        break;
+                }
+
+
             }
-        }
 
-        if (login != null) {
-            boolean clientMenuRunning = true;
-            Client client = clientService.findClientByLogin(login);
-            while (clientMenuRunning) {
+            while (currentClient != null) {
                 displayMenu.showClientMenu();
                 int clientChoice = consoleInput.readInt();
                 switch (clientChoice) {
                     case 1:
-                        Client currentClient = clientService.findClientByLogin(login);
-                        System.out.println(currentClient.toString());
-                        BigDecimal balance = clientService.getBalance(currentClient);
-                        System.out.println("Ваш текущий баланс: " + balance);
+                        System.out.println(currentClient);
                         break;
                     case 2:
                         UUID transactionId = UUID.randomUUID();
@@ -68,7 +59,7 @@ public class Main {
                         System.out.print("Введите сумму пополнения: ");
                         BigDecimal creditAmount = consoleInput.readBigDecimal();
                         consoleInput.readString();
-                        if (clientService.credit(client, creditAmount, transactionId)) {
+                        if (transactionService.credit(currentClient, creditAmount, transactionId)) {
                             System.out.println("Вы успешно пополнили счет!");
                         } else {
                             System.out.println("Операция пополнения средств не произведена.");
@@ -80,7 +71,7 @@ public class Main {
                         System.out.print("Введите сумму, которую хотите снять: ");
                         BigDecimal debitAmount = consoleInput.readBigDecimal();
                         consoleInput.readString();
-                        if (clientService.debit(client, debitAmount, transactionId)) {
+                        if (transactionService.debit(currentClient, debitAmount, transactionId)) {
                             System.out.println("Вы успешно сняли деньги со счета!");
                         } else {
                             System.out.println("Операция снятия средств не произведена.");
@@ -88,18 +79,17 @@ public class Main {
                         break;
                     case 4:
                         System.out.println("История транзакций:");
-                        clientService.getClientTransactionHistory(client);
+                        transactionService.getClientTransactionHistory(currentClient);
                         break;
                     case 5:
-                        clientMenuRunning = false;
+                        currentClient = null;
                         break;
                     default:
                         System.out.println("Пожалуйста, выберите правильный пункт меню.");
                         break;
                 }
             }
-        } else {
-            System.out.println("Ошибка: login не установлен.");
         }
+
     }
 }

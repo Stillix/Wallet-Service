@@ -1,60 +1,80 @@
 package by.dorogokupets.walletservice.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ *
+ */
 public class Transaction {
-   private UUID transactionId = UUID.randomUUID();
-   private final Client client;
-   private final TransactionType type;
-   private final LocalDateTime timestamp;
+    private UUID transactionId;
+    private BigDecimal amount;
+    private final Client client;
 
-   public Transaction(Client client, TransactionType type, UUID transactionId) {
-      this.client = client;
-      this.type = type;
-      this.transactionId = transactionId;
-      this.timestamp = LocalDateTime.now();
-   }
+    private final TransactionType type;
+    private final LocalDateTime timestamp;
 
-   public UUID getTransactionId() {
-      return transactionId;
-   }
+    public Transaction(Client client, TransactionType type, BigDecimal amount, UUID transactionId) {
+        this.client = client;
+        this.type = type;
+        this.amount = amount;
+        this.transactionId = transactionId;
+        this.timestamp = LocalDateTime.now();
+    }
 
-   public Client getClient() {
-      return client;
-   }
+    public UUID getTransactionId() {
+        return transactionId;
+    }
 
-   public TransactionType getType() {
-      return type;
-   }
+    public void setTransactionId(UUID transactionId) {
+        this.transactionId = transactionId;
+    }
 
-   public LocalDateTime getTimestamp() {
-      return timestamp;
-   }
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      Transaction that = (Transaction) o;
-      return Objects.equals(transactionId, that.transactionId);
-   }
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
-   @Override
-   public int hashCode() {
-      return Objects.hash(transactionId);
-   }
+    public Client getClient() {
+        return client;
+    }
 
-   @Override
-   public String toString() {
-      final StringBuilder sb = new StringBuilder("Транзакция:   ");
-      sb.append("Идентификатор транзакции - ").append(transactionId);
-      sb.append(", имя клиента - ").append(client.getClientFirstName());
-      sb.append(", фамилия клиента - ").append(client.getClientLastName());
-      sb.append(", Тип транзакции - ").append(type);
-      sb.append(", Дата и время - ").append(timestamp);
-      sb.append('.');
-      return sb.toString();
-   }
+    public TransactionType getType() {
+        return type;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return Objects.equals(transactionId, that.transactionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Транзакция:   ");
+        sb.append("Идентификатор транзакции - ").append(transactionId);
+        sb.append(", имя клиента - ").append(client.getClientFirstName());
+        sb.append(", фамилия клиента - ").append(client.getClientLastName());
+        sb.append(", Тип транзакции - ").append(type);
+        sb.append(", Сумма - ").append(amount);
+        sb.append(", Дата и время - ").append(timestamp);
+        sb.append('.');
+        return sb.toString();
+    }
 }
