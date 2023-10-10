@@ -5,11 +5,26 @@ import by.dorogokupets.walletservice.entity.Transaction;
 
 import java.util.List;
 
+/**
+ *
+ *
+ */
 
 public interface TransactionRepository {
-
+    /**
+     * Add transaction in repository
+     *
+     * @param transaction
+     * @return Client
+     */
     Transaction add(Transaction transaction);
 
+    /**
+     * Find client transaction history by login
+     *
+     * @param login
+     * @return List<Transaction>
+     */
     List<Transaction> findClientTransactionHistoryByLogin(String login);
 
 

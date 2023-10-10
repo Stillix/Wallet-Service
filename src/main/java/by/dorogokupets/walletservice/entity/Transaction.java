@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+
 /**
- *
+ * Class representing a financial transaction associated with a client account.
  */
 public class Transaction {
     private UUID transactionId;
@@ -65,6 +66,11 @@ public class Transaction {
         return Objects.hash(transactionId);
     }
 
+    /**
+     * Overridden toString method to represent transaction information as a string.
+     *
+     * @return A string with transaction information.
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Транзакция:   ");

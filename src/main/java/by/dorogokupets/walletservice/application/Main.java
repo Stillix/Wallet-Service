@@ -12,6 +12,9 @@ import by.dorogokupets.walletservice.service.impl.TransactionServiceImpl;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * @author Darahakupets
+ */
 
 public class Main {
 

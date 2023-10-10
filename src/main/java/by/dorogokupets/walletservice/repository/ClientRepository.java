@@ -5,8 +5,10 @@ import by.dorogokupets.walletservice.entity.Client;
 public interface ClientRepository {
 
     /**
+     * Add client in repository
+     *
      * @param client
-     * @return
+     * @return Client
      */
     Client add(Client client);
 
