@@ -1,13 +1,26 @@
 package by.dorogokupets.walletservice.repository;
 
 import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.Transaction;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public interface ClientRepository {
 
-		boolean register(Client client);
+		boolean register(String login);
 
 		Client findClientByLogin(String login);
 
-		boolean authenticate(String login, String password);
+		boolean authenticate();
+
+		BigDecimal getBalance(Client client);
+
+		boolean debit(Client client, BigDecimal amount);
+
+		boolean credit(Client client, BigDecimal amount);
+
+
+		List<Transaction> getClientTransactionHistory(Client client);
 
 }

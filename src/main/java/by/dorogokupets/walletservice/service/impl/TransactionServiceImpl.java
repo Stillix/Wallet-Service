@@ -25,15 +25,6 @@ public class TransactionServiceImpl implements TransactionService {
 				return true;
 		}
 
-		@Override
-		public List<Transaction> getClientTransactionHistory(Client client) {
-				List<Transaction> history = new ArrayList<>();
-				for (Transaction transaction : transactions) {
-						if (transaction.getClient().equals(client)) {
-								history.add(transaction);
-						}
-				}
-				return history;
-		}
+
 
 }

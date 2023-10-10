@@ -66,21 +66,31 @@ public class Main {
 												System.out.println("Ваш текущий баланс: " + balance);
 												break;
 										case 2:
-												System.out.print("Введите суммму пополнения: ");
+												System.out.print("Введите сумму пополнения: ");
 												BigDecimal amount = consoleInput.readBigDecimal();
-												clientService.credit(client, amount);
+												consoleInput.readString();
+												if (clientService.credit(client, amount)) {
+														System.out.println("Вы успешно пополнили счет!");
+												} else {
+														System.out.println("Операция пополнения средств не произведена.");
+												}
 												break;
 										case 3:
 												System.out.print("Введите суммму, которую хотите снять: ");
 												amount = consoleInput.readBigDecimal();
-												clientService.debit(client, amount);
+												consoleInput.readString();
+												if (clientService.debit(client, amount)) {
+														System.out.println("Вы успешно сняли деньги со счета!");
+												} else {
+														System.out.println("Операция снятия средств не произведена.");
+												}
 												break;
 										case 4:
-												transactionService.getClientTransactionHistory(client);
+												System.out.println("История транзакций:");
+												clientService.getClientTransactionHistory(client);
 												break;
 										case 5:
 												clientMenuRunning = false;
-												// метод главный экран
 												break;
 										default:
 												System.out.println("Пожалуйста, выберите правильный пункт меню.");

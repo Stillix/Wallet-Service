@@ -47,12 +47,13 @@ public class Transaction {
 
    @Override
    public String toString() {
-      final StringBuilder sb = new StringBuilder("Transaction{");
-      sb.append("transactionId=").append(transactionId);
-      sb.append(", client=").append(client);
-      sb.append(", type=").append(type);
-      sb.append(", timestamp=").append(timestamp);
-      sb.append('}');
+      final StringBuilder sb = new StringBuilder("Транзакция:   ");
+      sb.append("Идентификатор транзакции - ").append(transactionId);
+      sb.append(", имя клиента - ").append(client.getClientFirstName());
+      sb.append(", фамилия клиента - ").append(client.getClientLastName());
+      sb.append(", Тип транзакции - ").append(type);
+      sb.append(", Дата и время - ").append(timestamp);
+      sb.append('.');
       return sb.toString();
    }
 }

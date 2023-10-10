@@ -45,7 +45,10 @@ public class ClientServiceImpl implements ClientService {
 						clients.put(login, client);
 						return true;
 				}
-				return false;
+				else {
+						System.out.println("Клиент с таким логином уже существует!");
+						return false;
+				}
 		}
 
 		@Override
@@ -92,5 +95,17 @@ public class ClientServiceImpl implements ClientService {
 				}
 				return false;
 		}
-
+		@Override
+		public List<Transaction> getClientTransactionHistory(Client client) {
+				if (transactions.isEmpty()) {
+						System.out.println("У Вас, " + client.getClientFirstName() + ", нет транзакций!");
+				} else {
+						for (Transaction transaction : transactions) {
+								if (transaction.getClient().equals(client)) {
+										System.out.println(transaction);
+								}
+						}
+				}
+				return transactions;
+		}
 }

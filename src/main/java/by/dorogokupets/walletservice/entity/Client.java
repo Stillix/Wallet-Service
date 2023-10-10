@@ -68,11 +68,10 @@ public class Client {
 
    @Override
    public String toString() {
-      final StringBuilder sb = new StringBuilder("Client{");
-      sb.append("clientName='").append(clientFirstName).append('\'');
-      sb.append(", clientSurname='").append(clientLastName).append('\'');
-      sb.append(", balance=").append(balance);
-      sb.append('}');
+      final StringBuilder sb = new StringBuilder("Информация об счете:\n");
+      sb.append("Имя: ").append(clientFirstName).append("\n");
+      sb.append("Фамилия: ").append(clientLastName).append("\n");
+      sb.append("Баланс: ").append(balance).append("\n");
       return sb.toString();
    }
 }

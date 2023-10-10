@@ -11,5 +11,4 @@ public interface TransactionService {
 
 		boolean createTransaction(Client client, TransactionType type);
 
-		List<Transaction> getClientTransactionHistory(Client client);
 }

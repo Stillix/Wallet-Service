@@ -11,5 +11,5 @@ public interface TransactionRepository {
 
 		boolean createTransaction(Client client, TransactionType type);
 
-		List<Transaction> getClientTransactionHistory(Client client);
+
 }
