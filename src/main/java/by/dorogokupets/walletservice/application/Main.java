@@ -11,10 +11,7 @@ import by.dorogokupets.walletservice.service.impl.ClientServiceImpl;
 import by.dorogokupets.walletservice.service.impl.TransactionServiceImpl;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class Main {
@@ -66,20 +63,24 @@ public class Main {
 												System.out.println("Ваш текущий баланс: " + balance);
 												break;
 										case 2:
+												UUID transactionId = UUID.randomUUID();
+												System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
 												System.out.print("Введите сумму пополнения: ");
-												BigDecimal amount = consoleInput.readBigDecimal();
+												BigDecimal creditAmount = consoleInput.readBigDecimal();
 												consoleInput.readString();
-												if (clientService.credit(client, amount)) {
+												if (clientService.credit(client, creditAmount, transactionId)) {
 														System.out.println("Вы успешно пополнили счет!");
 												} else {
 														System.out.println("Операция пополнения средств не произведена.");
 												}
 												break;
 										case 3:
-												System.out.print("Введите суммму, которую хотите снять: ");
-												amount = consoleInput.readBigDecimal();
+												transactionId = UUID.randomUUID();
+												System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
+												System.out.print("Введите сумму, которую хотите снять: ");
+												BigDecimal debitAmount = consoleInput.readBigDecimal();
 												consoleInput.readString();
-												if (clientService.debit(client, amount)) {
+												if (clientService.debit(client, debitAmount, transactionId)) {
 														System.out.println("Вы успешно сняли деньги со счета!");
 												} else {
 														System.out.println("Операция снятия средств не произведена.");

@@ -5,14 +5,15 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Transaction {
-   private final UUID transactionId = UUID.randomUUID();
+   private UUID transactionId = UUID.randomUUID();
    private final Client client;
    private final TransactionType type;
    private final LocalDateTime timestamp;
 
-   public Transaction(Client client, TransactionType type) {
+   public Transaction(Client client, TransactionType type, UUID transactionId) {
       this.client = client;
       this.type = type;
+      this.transactionId = transactionId;
       this.timestamp = LocalDateTime.now();
    }
 

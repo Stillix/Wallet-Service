@@ -9,17 +9,13 @@ import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.util.PasswordEncoder;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClientServiceImpl implements ClientService {
 
 		private final List<Transaction> transactions = new ArrayList<>();
 		private final Map<String, Client> clients = new HashMap<>();
 		private static PasswordEncoder passwordEncoder = new PasswordEncoder();
-		DisplayMenuImpl displayMenu = new DisplayMenuImpl();
 		ConsoleInput consoleInput = new ConsoleInput();
 
 		public ClientServiceImpl() {
@@ -44,8 +40,7 @@ public class ClientServiceImpl implements ClientService {
 						client.setBalance(BigDecimal.valueOf(0));
 						clients.put(login, client);
 						return true;
-				}
-				else {
+				} else {
 						System.out.println("Клиент с таким логином уже существует!");
 						return false;
 				}
@@ -73,11 +68,11 @@ public class ClientServiceImpl implements ClientService {
 		}
 
 		@Override
-		public boolean debit(Client client, BigDecimal amount) {
+		public boolean debit(Client client, BigDecimal amount, UUID transactionId) {
 				if (client.getBalance().compareTo(amount) >= 0) {
 						BigDecimal newBalance = client.getBalance().subtract(amount);
 						client.setBalance(newBalance);
-						Transaction transaction = new Transaction(client, TransactionType.DEBIT);
+						Transaction transaction = new Transaction(client, TransactionType.DEBIT, transactionId);
 						transactions.add(transaction);
 						return true;
 				}
@@ -85,16 +80,17 @@ public class ClientServiceImpl implements ClientService {
 		}
 
 		@Override
-		public boolean credit(Client client, BigDecimal amount) {
+		public boolean credit(Client client, BigDecimal amount, UUID transactionId) {
 				if (amount.doubleValue() > 0) {
 						BigDecimal newBalance = client.getBalance().add(amount);
 						client.setBalance(newBalance);
-						Transaction transaction = new Transaction(client, TransactionType.CREDIT);
+						Transaction transaction = new Transaction(client, TransactionType.CREDIT, transactionId);
 						transactions.add(transaction);
 						return true;
 				}
 				return false;
 		}
+
 		@Override
 		public List<Transaction> getClientTransactionHistory(Client client) {
 				if (transactions.isEmpty()) {

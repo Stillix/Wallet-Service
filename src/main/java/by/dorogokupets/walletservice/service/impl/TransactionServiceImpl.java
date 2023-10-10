@@ -20,7 +20,7 @@ public class TransactionServiceImpl implements TransactionService {
 								return false;
 						}
 				}
-				Transaction transaction = new Transaction(client, type);
+				Transaction transaction = new Transaction(client, type,transactionId);
 				transactions.add(transaction);
 				return true;
 		}
