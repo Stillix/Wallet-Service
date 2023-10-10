@@ -24,6 +24,7 @@ public class Main {
 				DisplayMenu displayMenu = new DisplayMenuImpl();
 				String login = null;
 
+
 				boolean isRunning = true;
 				while (isRunning) {
 						displayMenu.showMainMenu();
