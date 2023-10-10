@@ -1,20 +1,17 @@
 package by.dorogokupets.walletservice.service;
 
 import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
-import by.dorogokupets.walletservice.exception.ServiceException;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 
 public interface ClientService {
 
-   boolean register(String login, String password, String firstName, String lastName) throws ServiceException;
+   boolean register(String login);
 
    Client findClientByLogin(String login);
 
-   boolean authenticate(String login, String password);
+   boolean authenticate();
 
    BigDecimal getBalance(Client client);
 

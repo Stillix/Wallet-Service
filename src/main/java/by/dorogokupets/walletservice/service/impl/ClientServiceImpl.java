@@ -3,7 +3,8 @@ package by.dorogokupets.walletservice.service.impl;
 import by.dorogokupets.walletservice.entity.Client;
 import by.dorogokupets.walletservice.entity.Transaction;
 import by.dorogokupets.walletservice.entity.TransactionType;
-import by.dorogokupets.walletservice.repository.ClientRepository;
+import by.dorogokupets.walletservice.infrastructure.allmenu.DisplayMenuImpl;
+import by.dorogokupets.walletservice.infrastructure.in.ConsoleInput;
 import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.util.PasswordEncoder;
 
@@ -14,23 +15,31 @@ import java.util.List;
 import java.util.Map;
 
 public class ClientServiceImpl implements ClientService {
-		private final ClientRepository clientRepository;
+
 		private final List<Transaction> transactions = new ArrayList<>();
 		private final Map<String, Client> clients = new HashMap<>();
 		private static PasswordEncoder passwordEncoder = new PasswordEncoder();
+		DisplayMenuImpl displayMenu = new DisplayMenuImpl();
+		ConsoleInput consoleInput = new ConsoleInput();
 
-		public ClientServiceImpl(ClientRepository clientRepository) {
-				this.clientRepository = clientRepository;
+		public ClientServiceImpl() {
+
 		}
 
 		@Override
-		public boolean register(String login, String password, String firstName, String lastName) {
+		public boolean register(String login) {
 				if (!clients.containsKey(login)) {
+						System.out.print("Введите пароль: ");
+						String password = consoleInput.readString();
+						System.out.print("Введите имя: ");
+						String firstName = consoleInput.readString();
+						System.out.print("Введите фамилию: ");
+						String lastName = consoleInput.readString();
 						Client client = new Client();
 						client.setLogin(login);
 						String digest = passwordEncoder.encode(password);
 						client.setPassword(digest);
-						client.setClientName(firstName);
+						client.setClientFirstName(firstName);
 						client.setClientLastName(lastName);
 						client.setBalance(BigDecimal.valueOf(0));
 						clients.put(login, client);
@@ -45,8 +54,12 @@ public class ClientServiceImpl implements ClientService {
 		}
 
 		@Override
-		public boolean authenticate(String login, String password) {
-				Client client = clientRepository.findClientByLogin(login);
+		public boolean authenticate() {
+				System.out.print("Введите логин: ");
+				String login = consoleInput.readString();
+				System.out.print("Введите пароль: ");
+				String password = consoleInput.readString();
+				Client client = this.findClientByLogin(login);
 				String digest = passwordEncoder.encode(password);
 				return client != null && client.getPassword().equals(digest);
 		}

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Client {
-   private String clientName;
+   private String clientFirstName;
    private String clientLastName;
    private BigDecimal balance;
    private String login;
@@ -13,12 +13,12 @@ public class Client {
    public Client() {
    }
 
-   public String getClientName() {
-      return clientName;
+   public String getClientFirstName() {
+      return clientFirstName;
    }
 
-   public void setClientName(String clientName) {
-      this.clientName = clientName;
+   public void setClientFirstName(String clientFirstName) {
+      this.clientFirstName = clientFirstName;
    }
 
    public String getClientLastName() {
@@ -58,18 +58,18 @@ public class Client {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       Client client = (Client) o;
-      return Objects.equals(clientName, client.clientName) && Objects.equals(clientLastName, client.clientLastName);
+      return Objects.equals(clientFirstName, client.clientFirstName) && Objects.equals(clientLastName, client.clientLastName);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(clientName, clientLastName);
+      return Objects.hash(clientFirstName, clientLastName);
    }
 
    @Override
    public String toString() {
       final StringBuilder sb = new StringBuilder("Client{");
-      sb.append("clientName='").append(clientName).append('\'');
+      sb.append("clientName='").append(clientFirstName).append('\'');
       sb.append(", clientSurname='").append(clientLastName).append('\'');
       sb.append(", balance=").append(balance);
       sb.append('}');

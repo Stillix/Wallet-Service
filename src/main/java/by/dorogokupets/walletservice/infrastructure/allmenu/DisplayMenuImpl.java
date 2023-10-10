@@ -17,5 +17,6 @@ public class DisplayMenuImpl implements DisplayMenu{
 				System.out.println("2. Пополнение средств");
 				System.out.println("3. Снятие средств");
 				System.out.println("4. История транзакций");
+				System.out.println("5. Выход");
 		}
 }
