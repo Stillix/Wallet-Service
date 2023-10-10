@@ -13,6 +13,7 @@ public class PasswordEncoder {
      * @param text The plain text password to encode.
      * @return The encoded password as an MD5 hash.
      */
+
     public static String encode(String text) {
         return DigestUtils.md5Hex(text);
     }
