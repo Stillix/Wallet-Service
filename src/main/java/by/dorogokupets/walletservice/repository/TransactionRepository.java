@@ -6,8 +6,7 @@ import by.dorogokupets.walletservice.entity.Transaction;
 import java.util.List;
 
 /**
- *
- *
+ * An interface representing a repository for managing transaction data.
  */
 
 public interface TransactionRepository {
