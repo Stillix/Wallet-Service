@@ -1,0 +1,17 @@
+by\dorogokupets\walletservice\repository\impl\ClientRepositoryImpl.class
+by\dorogokupets\walletservice\service\impl\TransactionServiceImpl.class
+by\dorogokupets\walletservice\repository\ClientRepository.class
+by\dorogokupets\walletservice\application\Main.class
+by\dorogokupets\walletservice\service\impl\ClientServiceImpl.class
+by\dorogokupets\walletservice\entity\Transaction.class
+by\dorogokupets\walletservice\entity\TransactionType.class
+by\dorogokupets\walletservice\service\ClientService.class
+by\dorogokupets\walletservice\infrastructure\in\ConsoleInput.class
+by\dorogokupets\walletservice\infrastructure\out\ConsoleOutput.class
+by\dorogokupets\walletservice\util\PasswordEncoder.class
+by\dorogokupets\walletservice\repository\impl\TransactionRepositoryImpl.class
+by\dorogokupets\walletservice\repository\TransactionRepository.class
+by\dorogokupets\walletservice\entity\Client.class
+by\dorogokupets\walletservice\infrastructure\menu\DisplayMenu.class
+by\dorogokupets\walletservice\infrastructure\menu\impl\DisplayMenuImpl.class
+by\dorogokupets\walletservice\service\TransactionService.class
