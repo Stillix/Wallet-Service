@@ -23,6 +23,9 @@ public class ClientServiceImplTest extends TestCase {
         clientService = new ClientServiceImpl(consoleInput);
     }
 
+    /**
+     * Testing the register() method of the ClientServiceImpl class.
+     */
     public void testRegister() {
         Mockito.when(consoleInput.readString()).thenReturn("testLogin", "testPassword", "TestFirstName", "TestLastName");
         boolean result = clientService.register();
@@ -30,6 +33,9 @@ public class ClientServiceImplTest extends TestCase {
         assertTrue(result);
     }
 
+    /**
+     * Testing the findClientByLogin() method of the ClientServiceImpl class.
+     */
     public void testFindClientByLogin() {
         Client testClient = new Client("TestFirstName", "TestLastName", new BigDecimal(10), "test", "098f6bcd4621d373cade4e832627b4f6");
         clientRepository.add(testClient);
@@ -42,6 +48,9 @@ public class ClientServiceImplTest extends TestCase {
         assertEquals("TestLastName", foundClient.getClientLastName());
     }
 
+    /**
+     * Testing the getBalance() method of the ClientServiceImpl class.
+     */
     public void testGetBalance() {
         Client client = new Client();
         client.setBalance(BigDecimal.valueOf(100));

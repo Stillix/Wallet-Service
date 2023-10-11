@@ -20,7 +20,9 @@ public class TransactionServiceImplTest {
     public void setUp() throws Exception {
         transactionService = new TransactionServiceImpl();
     }
-
+    /**
+     * Testing the debit() method of the TransactionServiceImpl class.
+     */
     @Test
     public void debit() {
         Client client = new Client();
@@ -32,7 +34,9 @@ public class TransactionServiceImplTest {
         assertTrue(result);
         assertEquals(BigDecimal.valueOf(50), client.getBalance());
     }
-
+    /**
+     * Testing the credit() method of the TransactionServiceImpl class.
+     */
     @Test
     public void credit() {
         Client client = new Client();
@@ -45,7 +49,9 @@ public class TransactionServiceImplTest {
         assertTrue(result);
         assertEquals(initialBalance.add(amount), client.getBalance());
     }
-
+    /**
+     * Testing the getClientTransactionHistory() method of the TransactionServiceImpl class.
+     */
     @Test
     public void getClientTransactionHistory() {
         Client client = new Client("test", "test", new BigDecimal(10), "test", "098f6bcd4621d373cade4e832627b4f6");
