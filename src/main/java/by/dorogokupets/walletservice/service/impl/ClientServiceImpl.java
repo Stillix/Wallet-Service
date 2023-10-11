@@ -12,6 +12,9 @@ import org.apache.commons.codec.binary.StringUtils;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * Implementation of the ClientService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.
+ */
 public class ClientServiceImpl implements ClientService {
 
     private ConsoleInput consoleInput;
