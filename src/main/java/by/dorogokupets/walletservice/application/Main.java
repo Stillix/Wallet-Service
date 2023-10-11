@@ -81,7 +81,7 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.println("История транзакций:");
+                        System.out.println("История транзакций");
                         transactionService.getClientTransactionHistory(currentClient);
                         break;
                     case 5:
