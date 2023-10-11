@@ -73,13 +73,13 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("РўСЂР°РЅР·Р°РєС†РёСЏ:   ");
-        sb.append("РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚СЂР°РЅР·Р°РєС†РёРё - ").append(transactionId);
-        sb.append(", РёРјСЏ РєР»РёРµРЅС‚Р° - ").append(client.getClientFirstName());
-        sb.append(", С„Р°РјРёР»РёСЏ РєР»РёРµРЅС‚Р° - ").append(client.getClientLastName());
-        sb.append(", РўРёРї С‚СЂР°РЅР·Р°РєС†РёРё - ").append(type);
-        sb.append(", РЎСѓРјРјР° - ").append(amount);
-        sb.append(", Р”Р°С‚Р° Рё РІСЂРµРјСЏ - ").append(timestamp);
+        final StringBuilder sb = new StringBuilder("Транзакция:   ");
+        sb.append("Идентификатор транзакции - ").append(transactionId);
+        sb.append(", имя клиента - ").append(client.getClientFirstName());
+        sb.append(", фамилия клиента - ").append(client.getClientLastName());
+        sb.append(", Тип транзакции - ").append(type);
+        sb.append(", Сумма - ").append(amount);
+        sb.append(", Дата и время - ").append(timestamp);
         sb.append('.');
         return sb.toString();
     }

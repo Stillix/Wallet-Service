@@ -19,23 +19,23 @@ public interface ClientService {
     /**
      * Find a client by their login.
      *
-     * @param login The login of the client to search for.
-     * @return The client object, or null if not found.
+     * @param login       The login of the client to search for.
+     * @return Client     The client object
      */
     Client findClientByLogin(String login);
 
     /**
      * Authenticate a client by their credentials (login and password).
      *
-     * @return The authenticated client, or null if authentication fails.
+     * @return Client     The authenticated client, or null if authentication fails.
      */
     Client authenticate();
 
     /**
      * Get the balance of a client.
      *
-     * @param client The client for whom to retrieve the balance.
-     * @return The client's balance.
+     * @param client     The client for whom to retrieve the balance.
+     * @return BigDecimal     The client's balance.
      */
     BigDecimal getBalance(Client client);
 }

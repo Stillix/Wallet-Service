@@ -79,10 +79,10 @@ public class Client {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("РРЅС„РѕСЂРјР°С†РёСЏ РѕР± СЃС‡РµС‚Рµ:\n");
-        sb.append("РРјСЏ: ").append(clientFirstName).append("\n");
-        sb.append("Р¤Р°РјРёР»РёСЏ: ").append(clientLastName).append("\n");
-        sb.append("Р‘Р°Р»Р°РЅСЃ: ").append(balance).append("\n");
+        final StringBuilder sb = new StringBuilder("Информация об счете:\n");
+        sb.append("Имя: ").append(clientFirstName).append("\n");
+        sb.append("Фамилия: ").append(clientLastName).append("\n");
+        sb.append("Баланс: ").append(balance).append("\n");
         return sb.toString();
     }
 }

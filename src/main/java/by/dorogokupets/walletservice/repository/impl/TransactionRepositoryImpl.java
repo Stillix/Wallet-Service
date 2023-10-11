@@ -5,7 +5,9 @@ import by.dorogokupets.walletservice.repository.TransactionRepository;
 
 import java.util.*;
 
-
+/**
+ * Implementation of the TransactionRepository interface, representing a repository of financial transactions.
+ */
 public class TransactionRepositoryImpl implements TransactionRepository {
     private static final Map<UUID, Transaction> transactions = new HashMap<>();
 

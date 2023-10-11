@@ -42,7 +42,7 @@ public class Main {
                         System.exit(1);
                         break;
                     default:
-                        System.out.println("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РїСЂР°РІРёР»СЊРЅС‹Р№ РїСѓРЅРєС‚ РјРµРЅСЋ.");
+                        System.out.println("Пожалуйста, выберите правильный пункт меню.");
                         break;
                 }
 
@@ -58,37 +58,37 @@ public class Main {
                         break;
                     case 2:
                         UUID transactionId = UUID.randomUUID();
-                        System.out.println("РЎРіРµРЅРµСЂРёСЂРѕРІР°РЅ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚СЂР°РЅР·Р°РєС†РёРё: " + transactionId);
-                        System.out.print("Р’РІРµРґРёС‚Рµ СЃСѓРјРјСѓ РїРѕРїРѕР»РЅРµРЅРёСЏ: ");
+                        System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
+                        System.out.print("Введите сумму пополнения: ");
                         BigDecimal creditAmount = consoleInput.readBigDecimal();
                         consoleInput.readString();
                         if (transactionService.credit(currentClient, creditAmount, transactionId)) {
-                            System.out.println("Р’С‹ СѓСЃРїРµС€РЅРѕ РїРѕРїРѕР»РЅРёР»Рё СЃС‡РµС‚!");
+                            System.out.println("Вы успешно пополнили счет!");
                         } else {
-                            System.out.println("РћРїРµСЂР°С†РёСЏ РїРѕРїРѕР»РЅРµРЅРёСЏ СЃСЂРµРґСЃС‚РІ РЅРµ РїСЂРѕРёР·РІРµРґРµРЅР°.");
+                            System.out.println("Операция пополнения средств не произведена.");
                         }
                         break;
                     case 3:
                         transactionId = UUID.randomUUID();
-                        System.out.println("РЎРіРµРЅРµСЂРёСЂРѕРІР°РЅ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚СЂР°РЅР·Р°РєС†РёРё: " + transactionId);
-                        System.out.print("Р’РІРµРґРёС‚Рµ СЃСѓРјРјСѓ, РєРѕС‚РѕСЂСѓСЋ С…РѕС‚РёС‚Рµ СЃРЅСЏС‚СЊ: ");
+                        System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
+                        System.out.print("Введите сумму, которую хотите снять: ");
                         BigDecimal debitAmount = consoleInput.readBigDecimal();
                         consoleInput.readString();
                         if (transactionService.debit(currentClient, debitAmount, transactionId)) {
-                            System.out.println("Р’С‹ СѓСЃРїРµС€РЅРѕ СЃРЅСЏР»Рё РґРµРЅСЊРіРё СЃРѕ СЃС‡РµС‚Р°!");
+                            System.out.println("Вы успешно сняли деньги со счета!");
                         } else {
-                            System.out.println("РћРїРµСЂР°С†РёСЏ СЃРЅСЏС‚РёСЏ СЃСЂРµРґСЃС‚РІ РЅРµ РїСЂРѕРёР·РІРµРґРµРЅР°.");
+                            System.out.println("Операция снятия средств не произведена.");
                         }
                         break;
                     case 4:
-                        System.out.println("РСЃС‚РѕСЂРёСЏ С‚СЂР°РЅР·Р°РєС†РёР№");
+                        System.out.println("История транзакций");
                         transactionService.getClientTransactionHistory(currentClient);
                         break;
                     case 5:
                         currentClient = null;
                         break;
                     default:
-                        System.out.println("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РїСЂР°РІРёР»СЊРЅС‹Р№ РїСѓРЅРєС‚ РјРµРЅСЋ.");
+                        System.out.println("Пожалуйста, выберите правильный пункт меню.");
                         break;
                 }
             }
