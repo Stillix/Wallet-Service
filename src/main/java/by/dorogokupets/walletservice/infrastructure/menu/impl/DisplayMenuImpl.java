@@ -6,20 +6,20 @@ public class DisplayMenuImpl implements DisplayMenu {
 
     @Override
     public void showMainMenu() {
-        System.out.println("******Меню******");
-        System.out.println("1. Войти");
-        System.out.println("2. Зарегистрироваться");
-        System.out.println("3. Выход из программы");
+        System.out.println("******РњРµРЅСЋ******");
+        System.out.println("1. Р’РѕР№С‚Рё");
+        System.out.println("2. Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ");
+        System.out.println("3. Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹");
     }
 
 
     @Override
     public void showClientMenu() {
-        System.out.println("******Меню******");
-        System.out.println("1. Просмотр баланса");
-        System.out.println("2. Пополнение средств");
-        System.out.println("3. Снятие средств");
-        System.out.println("4. История транзакций");
-        System.out.println("5. Выход");
+        System.out.println("******РњРµРЅСЋ******");
+        System.out.println("1. РџСЂРѕСЃРјРѕС‚СЂ Р±Р°Р»Р°РЅСЃР°");
+        System.out.println("2. РџРѕРїРѕР»РЅРµРЅРёРµ СЃСЂРµРґСЃС‚РІ");
+        System.out.println("3. РЎРЅСЏС‚РёРµ СЃСЂРµРґСЃС‚РІ");
+        System.out.println("4. РСЃС‚РѕСЂРёСЏ С‚СЂР°РЅР·Р°РєС†РёР№");
+        System.out.println("5. Р’С‹С…РѕРґ");
     }
 }
