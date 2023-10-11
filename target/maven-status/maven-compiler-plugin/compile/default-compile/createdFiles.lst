@@ -7,7 +7,6 @@ by\dorogokupets\walletservice\entity\Transaction.class
 by\dorogokupets\walletservice\entity\TransactionType.class
 by\dorogokupets\walletservice\service\ClientService.class
 by\dorogokupets\walletservice\infrastructure\in\ConsoleInput.class
-by\dorogokupets\walletservice\infrastructure\out\ConsoleOutput.class
 by\dorogokupets\walletservice\util\PasswordEncoder.class
 by\dorogokupets\walletservice\repository\impl\TransactionRepositoryImpl.class
 by\dorogokupets\walletservice\repository\TransactionRepository.class

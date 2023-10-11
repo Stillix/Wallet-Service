@@ -27,7 +27,7 @@ public class TransactionServiceImplTest {
      */
     @Test
     public void debit() {
-        Client client = new Client();
+        Client client = new Client("Bob", "Rabbit", new BigDecimal(0), "bobMC", "098f6bcd4621d373cade4e832627b4f6");
         client.setBalance(BigDecimal.valueOf(100));
         BigDecimal amount = BigDecimal.valueOf(50);
         UUID transactionId = UUID.randomUUID();
@@ -41,7 +41,7 @@ public class TransactionServiceImplTest {
      */
     @Test
     public void credit() {
-        Client client = new Client();
+        Client client = new Client("Joe", "Brown", new BigDecimal(0), "joe222", "098f6bcd4621d373cade4e832627b4f6");
         BigDecimal initialBalance = BigDecimal.valueOf(100);
         client.setBalance(initialBalance);
         BigDecimal amount = BigDecimal.valueOf(50);
