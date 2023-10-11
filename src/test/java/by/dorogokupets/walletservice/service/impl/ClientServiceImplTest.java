@@ -11,6 +11,9 @@ import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 
+/**
+ * Test class for the ClientServiceImpl class, testing the register, findClientByLogin, and getBalance methods.
+ */
 public class ClientServiceImplTest extends TestCase {
     private ClientServiceImpl clientService;
     private ConsoleInput consoleInput;

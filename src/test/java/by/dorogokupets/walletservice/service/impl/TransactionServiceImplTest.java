@@ -12,7 +12,9 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
+/**
+ * Test class for the TransactionServiceImpl class, testing the debit, credit, and getClientTransactionHistory methods.
+ */
 public class TransactionServiceImplTest {
     private TransactionServiceImpl transactionService;
 
