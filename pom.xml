@@ -42,20 +42,19 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.5.1</version>
+                    <artifactId>maven-dependency-plugin</artifactId>
                     <executions>
                         <execution>
-                            <phase>package</phase>
+                            <id>copy-dependencies</id>
+                            <phase>prepare-package</phase>
                             <goals>
-                                <goal>shade</goal>
+                                <goal>copy-dependencies</goal>
                             </goals>
                             <configuration>
-                                <transformers>
-                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                        <mainClass>by.dorogokupets.walletservice.application.Main</mainClass>
-                                    </transformer>
-                                </transformers>
+                                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                <overWriteReleases>false</overWriteReleases>
+                                <overWriteSnapshots>false</overWriteSnapshots>
+                                <overWriteIfNewer>true</overWriteIfNewer>
                             </configuration>
                         </execution>
                     </executions>
@@ -67,13 +66,34 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <classpathPrefix>libs/</classpathPrefix>
-                                <mainClass>
-                                    by.dorogokupets.walletservice.application.Main
-                                </mainClass>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <mainClass>by.dorogokupets.walletservice.application.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>by.dorogokupets.walletservice.application.Main</mainClass>
+                            </manifest>
+                        </archive>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
