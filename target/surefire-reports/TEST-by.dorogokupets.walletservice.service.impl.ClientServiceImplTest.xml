@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" time="2.386" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" time="1.567" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2023.1.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -61,7 +61,7 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" name="testGetBalance" time="2.282"/>
-  <testcase classname="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" name="testRegister" time="0.103"/>
+  <testcase classname="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" name="testGetBalance" time="1.502"/>
+  <testcase classname="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" name="testRegister" time="0.064"/>
   <testcase classname="by.dorogokupets.walletservice.service.impl.ClientServiceImplTest" name="testFindClientByLogin" time="0.001"/>
 </testsuite>
