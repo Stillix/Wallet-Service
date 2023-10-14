@@ -22,8 +22,6 @@ public class Main {
         ConsoleInput consoleInput = new ConsoleInput();
         ClientService clientService = new ClientServiceImpl(consoleInput);
         TransactionService transactionService = new TransactionServiceImpl();
-
-
         DisplayMenu displayMenu = new DisplayMenuImpl();
         Client currentClient = null;
 
