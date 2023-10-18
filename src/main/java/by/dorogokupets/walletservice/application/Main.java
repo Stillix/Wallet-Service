@@ -1,6 +1,7 @@
 package by.dorogokupets.walletservice.application;
 
 import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.DBProperties;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 import by.dorogokupets.walletservice.infrastructure.menu.DisplayMenu;
@@ -19,8 +20,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.UUID;
 
 /**
@@ -28,9 +32,26 @@ import java.util.UUID;
  */
 
 public class Main {
+
+  private static final DBProperties dbProperties;
+
+  static {
+    Properties prop;
+    try (InputStream input = ClientRepositoryImpl.class.getClassLoader().getResourceAsStream("liquibase.properties")) {
+      prop = new Properties();
+      prop.load(input);
+    } catch (IOException e) {
+      throw new ExceptionInInitializerError(e);
+    }
+    dbProperties = new DBProperties(
+            prop.getProperty("url"),
+            prop.getProperty("username"),
+            prop.getProperty("password")
+    );
+  }
   private static Logger logger = LogManager.getLogger();
-  static ClientRepository clientRepository = new ClientRepositoryImpl();
-  static TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository);
+  static ClientRepository clientRepository = new ClientRepositoryImpl(dbProperties);
+  static TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository, dbProperties);
 
   public static void main(String[] args) {
     Liquibase.runMigrations();

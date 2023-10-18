@@ -1,43 +1,32 @@
 package by.dorogokupets.walletservice.repository.impl;
 
 import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.DBProperties;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Optional;
-import java.util.Properties;
 /**
  * Implementation of the ClientRepository interface.
  */
 public class ClientRepositoryImpl implements ClientRepository {
-  private static final Properties prop = new Properties();
-  private static final String url;
-  private static final String username;
-  private static final String password;
+
+  private final DBProperties dbProperties;
   private static final String INSERT_CLIENT = "INSERT INTO entities.clients (client_id,login, password, first_name, last_name, balance) VALUES (nextval('entities.client_sequence'),?, ?, ?, ?, ?)";
   private static final String SELECT_CLIENT_BY_LOGIN = "SELECT * FROM entities.clients WHERE login = ?";
   private static final String SELECT_CLIENT_BY_ID = "SELECT * FROM entities.clients WHERE client_id = ?";
   private static final String UPDATE_BALANCE = "UPDATE entities.clients SET balance = ? WHERE client_id = ?";
 
-
-  static {
-    try (InputStream input = ClientRepositoryImpl.class.getClassLoader().getResourceAsStream("liquibase.properties")) {
-      prop.load(input);
-      url = prop.getProperty("url");
-      username = prop.getProperty("username");
-      password = prop.getProperty("password");
-    } catch (IOException e) {
-      throw new ExceptionInInitializerError(e);
-    }
+  public ClientRepositoryImpl(DBProperties dbProperties) {
+    this.dbProperties = dbProperties;
   }
 
   @Override
   public Optional<Client> add(Client client) throws RepositoryException {
-    try (Connection connection = DriverManager.getConnection(url, username, password); PreparedStatement statement = connection.prepareStatement(INSERT_CLIENT, Statement.RETURN_GENERATED_KEYS)) {
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
+         PreparedStatement statement = connection.prepareStatement(INSERT_CLIENT, Statement.RETURN_GENERATED_KEYS)) {
       statement.setString(1, client.getLogin());
       statement.setString(2, client.getPassword());
       statement.setString(3, client.getClientFirstName());
@@ -57,7 +46,8 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public Optional<Client> findClientByLogin(String login) throws RepositoryException {
-    try (Connection connection = DriverManager.getConnection(url, username, password); PreparedStatement statement = connection.prepareStatement(SELECT_CLIENT_BY_LOGIN)) {
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
+         PreparedStatement statement = connection.prepareStatement(SELECT_CLIENT_BY_LOGIN)) {
       statement.setString(1, login);
       try (ResultSet resultSet = statement.executeQuery()) {
         if (resultSet.next()) {
@@ -73,7 +63,8 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public Optional<Client> findClientById(int clientId) throws RepositoryException {
-    try (Connection connection = DriverManager.getConnection(url, username, password); PreparedStatement statement = connection.prepareStatement(SELECT_CLIENT_BY_ID)) {
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
+         PreparedStatement statement = connection.prepareStatement(SELECT_CLIENT_BY_ID)) {
       statement.setInt(1, clientId);
       try (ResultSet resultSet = statement.executeQuery()) {
         if (resultSet.next()) {
@@ -89,7 +80,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public void updateBalance(int clientId, BigDecimal newBalance) throws RepositoryException {
-    try (Connection connection = DriverManager.getConnection(url, username, password);
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
          PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE)) {
       statement.setBigDecimal(1, newBalance);
       statement.setInt(2, clientId);

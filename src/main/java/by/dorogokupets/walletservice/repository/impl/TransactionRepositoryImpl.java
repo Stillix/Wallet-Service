@@ -1,6 +1,7 @@
 package by.dorogokupets.walletservice.repository.impl;
 
 import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.entity.DBProperties;
 import by.dorogokupets.walletservice.entity.Transaction;
 import by.dorogokupets.walletservice.entity.TransactionType;
 import by.dorogokupets.walletservice.exception.RepositoryException;
@@ -17,32 +18,21 @@ import java.util.*;
  * Implementation of the TransactionRepository interface, representing a repository of financial transactions.
  */
 public class TransactionRepositoryImpl implements TransactionRepository {
-  private static final Properties prop = new Properties();
-  private static final String url;
-  private static final String username;
-  private static final String password;
+
+  private DBProperties dbProperties;
   private static final String INSERT_TRANSACTION = "INSERT INTO entities.transactions (transaction_id,amount, client_id, type,timestamp) VALUES (?,?, ?, ?,?)";
   private static final String SELECT_TRANSACTIONS_BY_CLIENT_ID = "SELECT * FROM entities.transactions WHERE client_id = ?";
   private ClientRepository clientRepository;
 
-  public TransactionRepositoryImpl(ClientRepository clientRepository) {
+  public TransactionRepositoryImpl(ClientRepository clientRepository, DBProperties dbProperties) {
+    this.dbProperties = dbProperties;
     this.clientRepository = clientRepository;
   }
 
-  static {
-    try (InputStream input = TransactionRepositoryImpl.class.getClassLoader().getResourceAsStream("liquibase.properties")) {
-      prop.load(input);
-      url = prop.getProperty("url");
-      username = prop.getProperty("username");
-      password = prop.getProperty("password");
-    } catch (IOException e) {
-      throw new ExceptionInInitializerError(e);
-    }
-  }
 
   @Override
   public Transaction add(Transaction transaction) throws RepositoryException {
-    try (Connection connection = DriverManager.getConnection(url, username, password);
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
          PreparedStatement statement = connection.prepareStatement(INSERT_TRANSACTION)) {
       statement.setObject(1, transaction.getTransactionId());
       statement.setBigDecimal(2, transaction.getAmount());
@@ -60,7 +50,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
   @Override
   public List<Transaction> findClientTransactionHistoryByClientId(int clientId) throws RepositoryException {
     List<Transaction> transactions = new ArrayList<>();
-    try (Connection connection = DriverManager.getConnection(url, username, password);
+    try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
          PreparedStatement statement = connection.prepareStatement(SELECT_TRANSACTIONS_BY_CLIENT_ID)) {
       statement.setInt(1, clientId);
       try (ResultSet resultSet = statement.executeQuery()) {
