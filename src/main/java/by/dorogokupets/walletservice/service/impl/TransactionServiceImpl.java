@@ -3,11 +3,18 @@ package by.dorogokupets.walletservice.service.impl;
 import by.dorogokupets.walletservice.entity.Client;
 import by.dorogokupets.walletservice.entity.Transaction;
 import by.dorogokupets.walletservice.entity.TransactionType;
+import by.dorogokupets.walletservice.exception.RepositoryException;
+import by.dorogokupets.walletservice.exception.ServiceException;
+import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.repository.TransactionRepository;
+import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
 import by.dorogokupets.walletservice.repository.impl.TransactionRepositoryImpl;
 import by.dorogokupets.walletservice.service.TransactionService;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,51 +22,86 @@ import java.util.UUID;
  * Implementation of the TransactionService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.
  */
 public class TransactionServiceImpl implements TransactionService {
-    private TransactionRepository transactionRepository = new TransactionRepositoryImpl();
+  private TransactionRepository transactionRepository;
+  private ClientRepository clientRepository;
 
-    public TransactionServiceImpl() {
+  public TransactionServiceImpl(TransactionRepository transactionRepository,ClientRepository clientRepository) {
+    this.transactionRepository = transactionRepository;
+    this.clientRepository = clientRepository;
+
+  }
+
+  @Override
+  public boolean debit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException {
+    if (amount.doubleValue() <= 0) {
+      return false;
+    }
+    if (client.getBalance().compareTo(amount) < 0) {
+      System.out.println("Недостаточно средств.");
+      return false;
+    }
+    BigDecimal newBalance = client.getBalance().subtract(amount);
+    client.setBalance(newBalance);
+
+    try {
+      clientRepository.updateBalance(client.getClientId(), newBalance);
+    } catch (RepositoryException e) {
+      throw new ServiceException(e.getMessage());
     }
 
-    @Override
-    public boolean debit(Client client, BigDecimal amount, UUID transactionId) {
-        if (amount.doubleValue() <= 0) {
-            return false;
-        }
-        if (client.getBalance().compareTo(amount) < 0) {
-            System.out.println("Недостаточно средств.");
-            return false;
-        }
-        BigDecimal newBalance = client.getBalance().subtract(amount);
-        client.setBalance(newBalance);
-        Transaction transaction = new Transaction(client, TransactionType.DEBIT, amount, transactionId);
+    Timestamp ts = Timestamp.from(ZonedDateTime.now().toInstant());
+    Transaction transaction = new Transaction(client, TransactionType.DEBIT, amount, transactionId, ts);
+
+    try {
+      transactionRepository.add(transaction);
+    } catch (RepositoryException e) {
+      throw new ServiceException(e.getMessage());
+    }
+    return true;
+  }
+
+  @Override
+  public boolean credit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException {
+    if (amount.doubleValue() > 0) {
+      BigDecimal newBalance = client.getBalance().add(amount);
+      client.setBalance(newBalance);
+
+      try {
+        clientRepository.updateBalance(client.getClientId(), newBalance);
+      } catch (RepositoryException e) {
+        throw new ServiceException(e.getMessage());
+      }
+
+      Timestamp ts = Timestamp.from(ZonedDateTime.now().toInstant());
+      Transaction transaction = new Transaction(client, TransactionType.CREDIT, amount, transactionId, ts);
+
+      try {
         transactionRepository.add(transaction);
-        return true;
+      } catch (RepositoryException e) {
+        throw new ServiceException(e.getMessage());
+      }
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    public boolean credit(Client client, BigDecimal amount, UUID transactionId) {
-        if (amount.doubleValue() > 0) {
-            BigDecimal newBalance = client.getBalance().add(amount);
-            client.setBalance(newBalance);
-            Transaction transaction = new Transaction(client, TransactionType.CREDIT, amount, transactionId);
-            transactionRepository.add(transaction);
-            return true;
-        }
-        return false;
+
+  @Override
+  public List<Transaction> getClientTransactionHistory(Client client) throws ServiceException {
+    int clientId = client.getClientId();
+    List<Transaction> transactions;
+    try {
+      transactions = transactionRepository.findClientTransactionHistoryByClientId(clientId);
+    } catch (RepositoryException e) {
+      throw new ServiceException(e.getMessage());
     }
-
-    @Override
-    public List<Transaction> getClientTransactionHistory(Client client) {
-        String login = client.getLogin();
-        List<Transaction> transactions = transactionRepository.findClientTransactionHistoryByLogin(login);
-        if (transactions.isEmpty()) {
-            System.out.println("У Вас, " + client.getClientFirstName() + ", нет транзакций!");
-        } else {
-            for (Transaction transaction : transactions) {
-                System.out.println(transaction);
-            }
-        }
-        return transactions;
+    if (transactions.isEmpty()) {
+      System.out.println("У Вас, " + client.getClientFirstName() + ", нет транзакций!");
+    } else {
+      for (Transaction transaction : transactions) {
+        System.out.println(transaction);
+      }
     }
-
+    return transactions;
+  }
 }
