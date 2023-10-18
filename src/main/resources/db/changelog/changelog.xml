@@ -7,8 +7,8 @@
         logicalFilePath="db/changelog/changelog.xml">
 
 
-    <include file="003-create-scheme.xml" relativeToChangelogFile="true"/>
-    <include file="001-create-tables.xml" relativeToChangelogFile="true"/>
-    <include file="002-insert-data.xml" relativeToChangelogFile="true"/>
+    <include file="002-create-scheme.xml" relativeToChangelogFile="true"/>
+    <include file="003-create-tables.xml" relativeToChangelogFile="true"/>
+    <include file="004-insert-data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

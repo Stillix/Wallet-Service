@@ -11,9 +11,4 @@
         </sql>
     </changeSet>
 
-<!--    <changeSet author="dorogokupets" id="2" runOnChange="true">-->
-<!--        <sql splitStatements="false" endDelimiter=";">-->
-<!--            CREATE SCHEMA IF NOT EXISTS service AUTHORIZATION dorogokupets-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>
