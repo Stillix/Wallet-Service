@@ -26,11 +26,12 @@ https://github.com/Stillix/Wallet-Service.git
 Убедитесь, что в корневой папке проекта находится файл pom.xml, который описывает зависимости и настройки проекта для Maven.
 Запустите сборку проекта с помощью команды mvn clean install. Maven загрузит зависимости, скомпилирует и упакует проект в JAR-файл.
 
+Запустить консоль, открыть директорию проекта и написать docker-compose up
 Запуск проекта:
 После успешной сборки проекта вы найдете JAR-файл в каталоге target внутри корневой папки проекта. Название JAR-файла: Wallet-Service-1.0-SNAPSHOT-jar-with-dependencies.jar.
 Откройте командную строку и перейдите в каталог, где находится JAR-файл.
 Выполните команду java -jar с указанием названия JAR-файла для запуска:
-   java -jar Wallet-Service-1.0-SNAPSHOT-jar-with-dependencies.jar
+   java -jar Wallet-Service-1.0-SNAPSHOT.jar
 
 ## Автор
 Илья Дорогокупец
