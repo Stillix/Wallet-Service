@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Optional;
 import java.util.Properties;
-
+/**
+ * Implementation of the ClientRepository interface.
+ */
 public class ClientRepositoryImpl implements ClientRepository {
   private static final Properties prop = new Properties();
   private static final String url;
@@ -19,7 +21,7 @@ public class ClientRepositoryImpl implements ClientRepository {
   private static final String INSERT_CLIENT = "INSERT INTO entities.clients (client_id,login, password, first_name, last_name, balance) VALUES (nextval('entities.client_sequence'),?, ?, ?, ?, ?)";
   private static final String SELECT_CLIENT_BY_LOGIN = "SELECT * FROM entities.clients WHERE login = ?";
   private static final String SELECT_CLIENT_BY_ID = "SELECT * FROM entities.clients WHERE client_id = ?";
-  String UPDATE_BALANCE = "UPDATE entities.clients SET balance = ? WHERE client_id = ?";
+  private static final String UPDATE_BALANCE = "UPDATE entities.clients SET balance = ? WHERE client_id = ?";
 
 
   static {

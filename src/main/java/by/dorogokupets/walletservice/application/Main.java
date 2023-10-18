@@ -30,7 +30,7 @@ import java.util.UUID;
 public class Main {
   private static Logger logger = LogManager.getLogger();
   static ClientRepository clientRepository = new ClientRepositoryImpl();
-  static TransactionRepository transactionRepository = new TransactionRepositoryImpl();
+  static TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository);
 
   public static void main(String[] args) {
     Liquibase.runMigrations();

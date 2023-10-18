@@ -23,7 +23,11 @@ public class TransactionRepositoryImpl implements TransactionRepository {
   private static final String password;
   private static final String INSERT_TRANSACTION = "INSERT INTO entities.transactions (transaction_id,amount, client_id, type,timestamp) VALUES (?,?, ?, ?,?)";
   private static final String SELECT_TRANSACTIONS_BY_CLIENT_ID = "SELECT * FROM entities.transactions WHERE client_id = ?";
-  ClientRepository clientRepository = new ClientRepositoryImpl();
+  private ClientRepository clientRepository;
+
+  public TransactionRepositoryImpl(ClientRepository clientRepository) {
+    this.clientRepository = clientRepository;
+  }
 
   static {
     try (InputStream input = TransactionRepositoryImpl.class.getClassLoader().getResourceAsStream("liquibase.properties")) {

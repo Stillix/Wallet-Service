@@ -8,6 +8,9 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * This class is responsible for running Liquibase migrations to manage the database schema.
+ */
 public class Liquibase {
   public static void runMigrations() {
     try {

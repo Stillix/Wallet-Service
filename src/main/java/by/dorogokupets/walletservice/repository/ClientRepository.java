@@ -26,9 +26,19 @@ public interface ClientRepository {
      * @return Client from repository
      */
     Optional<Client> findClientByLogin(String login) throws RepositoryException;
-
+    /**
+     * Search client in repository by client id
+     *
+     * @param clientId - Client id
+     * @return Optional Client from repository
+     */
 
     Optional<Client> findClientById(int clientId) throws RepositoryException;
-
+    /**
+     * Update balance in database
+     *
+     * @param clientId,newBalance
+     * @return void
+     */
     void updateBalance(int clientId, BigDecimal newBalance) throws RepositoryException;
 }

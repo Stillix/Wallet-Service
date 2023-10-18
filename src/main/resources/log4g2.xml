@@ -9,7 +9,7 @@
             <PatternLayout pattern="%r %-5level %logger{1} - %msg%n"/>
         </Console>
 
-        <RollingFile name="File" filename="C:\Users\tdoro\IdeaProjects\WebMVC\WebMVC\WebMVC\logs/log.txt" append="true"
+        <RollingFile name="File" filename="C:\Users\tdoro\IdeaProjects\Wallet-service\logs\log.txt" append="true"
                      filePattern="logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
             <PatternLayout pattern="${pattern_file}"/>
             <Policies>

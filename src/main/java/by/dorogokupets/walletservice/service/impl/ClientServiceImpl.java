@@ -5,7 +5,6 @@ import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 import by.dorogokupets.walletservice.infrastructure.in.ConsoleInput;
 import by.dorogokupets.walletservice.repository.ClientRepository;
-import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
 import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.util.PasswordEncoder;
 import org.apache.commons.codec.binary.StringUtils;
@@ -21,7 +20,6 @@ public class ClientServiceImpl implements ClientService {
   private ConsoleInput consoleInput;
   private ClientRepository clientRepository;
 
-
   public ClientServiceImpl() {
   }
 
@@ -35,19 +33,7 @@ public class ClientServiceImpl implements ClientService {
     System.out.print("Введите логин: ");
     String login = consoleInput.readString();
     if (clientRepository.findClientByLogin(login).isEmpty()) {
-      System.out.print("Введите пароль: ");
-      String password = consoleInput.readString();
-      System.out.print("Введите имя: ");
-      String firstName = consoleInput.readString();
-      System.out.print("Введите фамилию: ");
-      String lastName = consoleInput.readString();
-      Client client = new Client();
-      client.setLogin(login);
-      String encodedPassword = PasswordEncoder.encode(password);
-      client.setPassword(encodedPassword);
-      client.setClientFirstName(firstName);
-      client.setClientLastName(lastName);
-      client.setBalance(BigDecimal.valueOf(0));
+      Client client = createClientFromUserInput(login);
       clientRepository.add(client);
       System.out.println("Регистрация выполнена успешно. Выполните вход.");
       return true;
@@ -55,6 +41,23 @@ public class ClientServiceImpl implements ClientService {
       System.out.println("Клиент с таким логином уже существует!");
       return false;
     }
+  }
+
+  private Client createClientFromUserInput(String login) {
+    System.out.print("Введите пароль: ");
+    String password = consoleInput.readString();
+    System.out.print("Введите имя: ");
+    String firstName = consoleInput.readString();
+    System.out.print("Введите фамилию: ");
+    String lastName = consoleInput.readString();
+    Client client = new Client();
+    client.setLogin(login);
+    String encodedPassword = PasswordEncoder.encode(password);
+    client.setPassword(encodedPassword);
+    client.setClientFirstName(firstName);
+    client.setClientLastName(lastName);
+    client.setBalance(BigDecimal.valueOf(0));
+    return client;
   }
 
   @Override

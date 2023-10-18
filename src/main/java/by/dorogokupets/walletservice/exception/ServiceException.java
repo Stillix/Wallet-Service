@@ -1,6 +1,10 @@
 package by.dorogokupets.walletservice.exception;
 
-public class ServiceException extends Exception{
+/**
+ * This class represents a custom exception used in the wallet services
+ * to handle service-related errors.
+ */
+public class ServiceException extends Exception {
   public ServiceException() {
     super();
   }
