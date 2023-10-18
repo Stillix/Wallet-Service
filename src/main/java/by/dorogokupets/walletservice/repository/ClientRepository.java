@@ -2,16 +2,18 @@ package by.dorogokupets.walletservice.repository;
 
 import by.dorogokupets.walletservice.entity.Client;
 
+/**
+ * An interface representing a repository for managing client data.
+ */
 public interface ClientRepository {
 
     /**
-     * Add client in repository
+     * Add client to repository
      *
      * @param client
      * @return Client
      */
     Client add(Client client);
-
 
     /**
      * Search client in repository by login

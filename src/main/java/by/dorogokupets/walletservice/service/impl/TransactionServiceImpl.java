@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Implementation of the TransactionService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.
+ */
 public class TransactionServiceImpl implements TransactionService {
     private TransactionRepository transactionRepository = new TransactionRepositoryImpl();
 

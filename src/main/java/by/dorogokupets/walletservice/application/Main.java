@@ -22,8 +22,6 @@ public class Main {
         ConsoleInput consoleInput = new ConsoleInput();
         ClientService clientService = new ClientServiceImpl(consoleInput);
         TransactionService transactionService = new TransactionServiceImpl();
-
-
         DisplayMenu displayMenu = new DisplayMenuImpl();
         Client currentClient = null;
 
@@ -81,7 +79,7 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.println("История транзакций:");
+                        System.out.println("История транзакций");
                         transactionService.getClientTransactionHistory(currentClient);
                         break;
                     case 5:
