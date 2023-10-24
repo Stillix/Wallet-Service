@@ -8,6 +8,7 @@ import by.dorogokupets.walletservice.repository.ClientRepository;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Optional;
+
 /**
  * Implementation of the ClientRepository interface.
  */
