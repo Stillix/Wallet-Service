@@ -20,7 +20,7 @@ import java.util.*;
 public class TransactionRepositoryImpl implements TransactionRepository {
 
   private DBProperties dbProperties;
-  private static final String INSERT_TRANSACTION = "INSERT INTO entities.transactions (transaction_id,amount, client_id, type,timestamp) VALUES (?,?, ?, ?,?)";
+  private static final String INSERT_TRANSACTION = "INSERT INTO entities.transactions (amount, client_id, type,timestamp) VALUES (?, ?, ?,?)";
   private static final String SELECT_TRANSACTIONS_BY_CLIENT_ID = "SELECT * FROM entities.transactions WHERE client_id = ?";
   private ClientRepository clientRepository;
 
@@ -34,7 +34,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
   public Transaction add(Transaction transaction) throws RepositoryException {
     try (Connection connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getUsername(), dbProperties.getPassword());
          PreparedStatement statement = connection.prepareStatement(INSERT_TRANSACTION)) {
-      statement.setObject(1, transaction.getTransactionId());
+      statement.setInt(1, transaction.getTransactionId());
       statement.setBigDecimal(2, transaction.getAmount());
       int clientId = transaction.getClient().getClientId();
       statement.setInt(3, clientId);
@@ -56,7 +56,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
       try (ResultSet resultSet = statement.executeQuery()) {
         while (resultSet.next()) {
           Transaction transaction = new Transaction();
-          transaction.setTransactionId(UUID.fromString(resultSet.getString("transaction_id")));
+          transaction.setTransactionId(resultSet.getInt("transaction_id"));
           transaction.setAmount(resultSet.getBigDecimal("amount"));
           int clientID = resultSet.getInt("client_id");
           Optional<Client> clientOptional = clientRepository.findClientById(clientID);

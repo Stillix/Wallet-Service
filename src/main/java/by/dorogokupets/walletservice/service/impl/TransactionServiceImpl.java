@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
   }
 
   @Override
-  public boolean debit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException {
+  public boolean debit(Client client, BigDecimal amount) throws ServiceException {
     if (amount.doubleValue() <= 0) {
       return false;
     }
@@ -49,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     Timestamp ts = Timestamp.from(ZonedDateTime.now().toInstant());
-    Transaction transaction = new Transaction(client, TransactionType.DEBIT, amount, transactionId, ts);
+    Transaction transaction = new Transaction(client, TransactionType.DEBIT, amount, ts);
 
     try {
       transactionRepository.add(transaction);
@@ -60,7 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
   }
 
   @Override
-  public boolean credit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException {
+  public boolean credit(Client client, BigDecimal amount) throws ServiceException {
     if (amount.doubleValue() > 0) {
       BigDecimal newBalance = client.getBalance().add(amount);
       client.setBalance(newBalance);
@@ -72,7 +72,7 @@ public class TransactionServiceImpl implements TransactionService {
       }
 
       Timestamp ts = Timestamp.from(ZonedDateTime.now().toInstant());
-      Transaction transaction = new Transaction(client, TransactionType.CREDIT, amount, transactionId, ts);
+      Transaction transaction = new Transaction(client, TransactionType.CREDIT, amount, ts);
 
       try {
         transactionRepository.add(transaction);

@@ -11,7 +11,7 @@ import java.util.UUID;
  * Class representing a financial transaction associated with a client account.
  */
 public class Transaction {
-  private UUID transactionId;
+  private int transactionId;
   private BigDecimal amount;
   private Client client;
   private TransactionType type;
@@ -20,19 +20,18 @@ public class Transaction {
   public Transaction() {
   }
 
-  public Transaction(Client client, TransactionType type, BigDecimal amount, UUID transactionId,Timestamp timestamp) {
+  public Transaction(Client client, TransactionType type, BigDecimal amount, Timestamp timestamp) {
     this.client = client;
     this.type = type;
     this.amount = amount;
-    this.transactionId = transactionId;
     this.timestamp = timestamp;
   }
 
-  public UUID getTransactionId() {
+  public int getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(int transactionId) {
     this.transactionId = transactionId;
   }
 

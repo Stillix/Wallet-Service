@@ -37,18 +37,19 @@ public class Main {
 
   static {
     Properties prop;
-    try (InputStream input = ClientRepositoryImpl.class.getClassLoader().getResourceAsStream("liquibase.properties")) {
+    try (InputStream input = ClientRepositoryImpl.class.getClassLoader().getResourceAsStream("database.properties")) {
       prop = new Properties();
       prop.load(input);
     } catch (IOException e) {
       throw new ExceptionInInitializerError(e);
     }
     dbProperties = new DBProperties(
-            prop.getProperty("url"),
-            prop.getProperty("username"),
-            prop.getProperty("password")
+            prop.getProperty("db.url"),
+            prop.getProperty("db.username"),
+            prop.getProperty("db.password")
     );
   }
+
   private static Logger logger = LogManager.getLogger();
   static ClientRepository clientRepository = new ClientRepositoryImpl(dbProperties);
   static TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository, dbProperties);
@@ -102,13 +103,11 @@ public class Main {
             break;
           case 2:
             logger.log(Level.INFO, "Пополнение баланса...");
-            UUID transactionId = UUID.randomUUID();
-            System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
             System.out.print("Введите сумму пополнения: ");
             BigDecimal creditAmount = consoleInput.readBigDecimal();
             consoleInput.readString();
             try {
-              if (transactionService.credit(currentClient.get(), creditAmount, transactionId)) {
+              if (transactionService.credit(currentClient.get(), creditAmount)) {
                 System.out.println("Вы успешно пополнили счет!");
               } else {
                 System.out.println("Операция пополнения средств не произведена.");
@@ -119,13 +118,11 @@ public class Main {
             break;
           case 3:
             logger.log(Level.INFO, "Снятие средств со счета...");
-            transactionId = UUID.randomUUID();
-            System.out.println("Сгенерирован уникальный идентификатор транзакции: " + transactionId);
             System.out.print("Введите сумму, которую хотите снять: ");
             BigDecimal debitAmount = consoleInput.readBigDecimal();
             consoleInput.readString();
             try {
-              if (transactionService.debit(currentClient.get(), debitAmount, transactionId)) {
+              if (transactionService.debit(currentClient.get(), debitAmount)) {
                 System.out.println("Вы успешно сняли деньги со счета!");
               } else {
                 System.out.println("Операция снятия средств не произведена.");

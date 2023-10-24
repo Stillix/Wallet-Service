@@ -22,7 +22,7 @@ public interface TransactionService {
      * @param transactionId The unique identifier for the transaction.
      * @return true if the transaction is successful, false otherwise.
      */
-    boolean debit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException;
+    boolean debit(Client client, BigDecimal amount) throws ServiceException;
 
     /**
      * Perform a credit transaction, depositing a specified amount into a client's account.
@@ -32,7 +32,7 @@ public interface TransactionService {
      * @param transactionId The unique identifier for the transaction.
      * @return true if the transaction is successful, false otherwise.
      */
-    boolean credit(Client client, BigDecimal amount, UUID transactionId) throws ServiceException;
+    boolean credit(Client client, BigDecimal amount) throws ServiceException;
 
     /**
      * Get the transaction history for a specific client.

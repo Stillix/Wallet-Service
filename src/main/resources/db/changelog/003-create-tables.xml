@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+<databaseChangeLog  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
 
     <changeSet author="dorogokupets" id="create-client-sequence">
         <createSequence schemaName="entities" sequenceName="client_sequence" incrementBy="1" startValue="1"
+                        minValue="1"/>
+    </changeSet>
+
+    <changeSet author="dorogokupets" id="create-transaction-sequence">
+        <createSequence schemaName="entities" sequenceName="transaction_sequence" incrementBy="1" startValue="1"
                         minValue="1"/>
     </changeSet>
 
@@ -27,7 +32,7 @@
 
     <changeSet author="dorogokupets" id="create-transactions-table">
         <createTable tableName="transactions" schemaName="entities">
-            <column name="transaction_id" type="UUID">
+            <column name="transaction_id" type="integer" valueComputed="nextval('transaction_sequence')">
                 <constraints primaryKey="true" unique="true"/>
             </column>
             <column name="amount" type="DECIMAL(10, 2)"/>
