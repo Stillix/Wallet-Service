@@ -1,6 +1,10 @@
 package by.dorogokupets.walletservice.repository;
 
 import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.exception.RepositoryException;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * An interface representing a repository for managing client data.
@@ -13,7 +17,7 @@ public interface ClientRepository {
      * @param client
      * @return Client
      */
-    Client add(Client client);
+    Optional<Client> add(Client client) throws RepositoryException;
 
     /**
      * Search client in repository by login
@@ -21,7 +25,20 @@ public interface ClientRepository {
      * @param login - Client login
      * @return Client from repository
      */
-    Client findClientByLogin(String login);
+    Optional<Client> findClientByLogin(String login) throws RepositoryException;
+    /**
+     * Search client in repository by client id
+     *
+     * @param clientId - Client id
+     * @return Optional Client from repository
+     */
 
-
+    Optional<Client> findClientById(int clientId) throws RepositoryException;
+    /**
+     * Update balance in database
+     *
+     * @param clientId,newBalance
+     * @return void
+     */
+    void updateBalance(int clientId, BigDecimal newBalance) throws RepositoryException;
 }

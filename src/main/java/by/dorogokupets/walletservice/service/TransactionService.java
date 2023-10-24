@@ -3,6 +3,7 @@ package by.dorogokupets.walletservice.service;
 
 import by.dorogokupets.walletservice.entity.Client;
 import by.dorogokupets.walletservice.entity.Transaction;
+import by.dorogokupets.walletservice.exception.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +22,7 @@ public interface TransactionService {
      * @param transactionId The unique identifier for the transaction.
      * @return true if the transaction is successful, false otherwise.
      */
-    boolean debit(Client client, BigDecimal amount, UUID transactionId);
+    boolean debit(Client client, BigDecimal amount) throws ServiceException;
 
     /**
      * Perform a credit transaction, depositing a specified amount into a client's account.
@@ -31,7 +32,7 @@ public interface TransactionService {
      * @param transactionId The unique identifier for the transaction.
      * @return true if the transaction is successful, false otherwise.
      */
-    boolean credit(Client client, BigDecimal amount, UUID transactionId);
+    boolean credit(Client client, BigDecimal amount) throws ServiceException;
 
     /**
      * Get the transaction history for a specific client.
@@ -39,5 +40,5 @@ public interface TransactionService {
      * @param client The client for whom to retrieve the transaction history.
      * @return A list of transactions associated with the client.
      */
-    List<Transaction> getClientTransactionHistory(Client client);
+    List<Transaction> getClientTransactionHistory(Client client) throws ServiceException;
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <changeSet author="dorogokupets" id="create-client-sequence">
+        <createSequence schemaName="entities" sequenceName="client_sequence" incrementBy="1" startValue="1"
+                        minValue="1"/>
+    </changeSet>
+
+    <changeSet author="dorogokupets" id="create-transaction-sequence">
+        <createSequence schemaName="entities" sequenceName="transaction_sequence" incrementBy="1" startValue="1"
+                        minValue="1"/>
+    </changeSet>
+
+    <changeSet author="dorogokupets" id="create-clients-table">
+        <createTable tableName="clients" schemaName="entities">
+            <column name="client_id" type="integer" valueComputed="nextval('client_sequence')">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="login" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="balance" type="NUMERIC(10, 2)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dorogokupets" id="create-transactions-table">
+        <createTable tableName="transactions" schemaName="entities">
+            <column name="transaction_id" type="integer" valueComputed="nextval('transaction_sequence')">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="amount" type="DECIMAL(10, 2)"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="timestamp" type="TIMESTAMP"/>
+
+        </createTable>
+        <addForeignKeyConstraint baseTableName="transactions" baseColumnNames="client_id"
+                                 referencedTableName="clients" referencedColumnNames="client_id"
+                                 constraintName="transactions_client_id_fk" baseTableSchemaName="entities"
+                                 referencedTableSchemaName="entities"/>
+    </changeSet>
+</databaseChangeLog>
