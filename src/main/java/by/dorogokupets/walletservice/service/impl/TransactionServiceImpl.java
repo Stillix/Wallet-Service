@@ -1,22 +1,18 @@
 package by.dorogokupets.walletservice.service.impl;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
-import by.dorogokupets.walletservice.entity.TransactionType;
+import domain.entity.Client;
+import domain.entity.Transaction;
+import domain.enums.TransactionType;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.repository.TransactionRepository;
-import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
-import by.dorogokupets.walletservice.repository.impl.TransactionRepositoryImpl;
 import by.dorogokupets.walletservice.service.TransactionService;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Implementation of the TransactionService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.

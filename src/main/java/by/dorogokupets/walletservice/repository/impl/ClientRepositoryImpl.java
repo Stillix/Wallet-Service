@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.repository.impl;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.DBProperties;
+import domain.entity.Client;
+import domain.entity.DBProperties;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 

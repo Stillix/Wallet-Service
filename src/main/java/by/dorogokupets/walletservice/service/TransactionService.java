@@ -1,13 +1,12 @@
 package by.dorogokupets.walletservice.service;
 
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
+import domain.entity.Client;
+import domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * An interface representing the service for managing financial transactions.

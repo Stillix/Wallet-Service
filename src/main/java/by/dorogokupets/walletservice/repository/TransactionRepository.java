@@ -1,11 +1,10 @@
 package by.dorogokupets.walletservice.repository;
 
 
-import by.dorogokupets.walletservice.entity.Transaction;
+import domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * An interface representing a repository for managing transaction data.

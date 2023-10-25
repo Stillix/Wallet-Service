@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.application;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.DBProperties;
+import domain.entity.Client;
+import domain.entity.DBProperties;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 import by.dorogokupets.walletservice.infrastructure.menu.DisplayMenu;
@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.UUID;
 
 /**
  * @author Darahakupets

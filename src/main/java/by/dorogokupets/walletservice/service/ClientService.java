@@ -1,6 +1,6 @@
 package by.dorogokupets.walletservice.service;
 
-import by.dorogokupets.walletservice.entity.Client;
+import domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 
