@@ -3,7 +3,7 @@ package by.dorogokupets.walletservice.service.impl;
 import domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
-import by.dorogokupets.walletservice.infrastructure.in.ConsoleInput;
+import by.dorogokupets.walletservice.infrastructure.in.input.ConsoleInput;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.util.PasswordEncoder;

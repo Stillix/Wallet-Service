@@ -1,4 +1,4 @@
-package by.dorogokupets.walletservice.infrastructure.in;
+package by.dorogokupets.walletservice.infrastructure.in.input;
 
 
 import java.math.BigDecimal;
