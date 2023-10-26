@@ -36,13 +36,14 @@ public class TransactionServlet extends HttpServlet {
       return;
     }
 
-    boolean transactionSuccessful;
+    boolean transactionSuccessful = false;
     try {
       transactionSuccessful = transactionService.processTransaction(transactionDTO);
     } catch (ServiceException e) {
-      throw new RuntimeException(e);
+      System.out.println("Транзакция не проведена");
     }
-
+    resp.setContentType("application/json");
+    resp.setCharacterEncoding("UTF-8");
     if (transactionSuccessful) {
       resp.setStatus(HttpServletResponse.SC_CREATED);
       resp.getWriter().write("Transaction successful");
