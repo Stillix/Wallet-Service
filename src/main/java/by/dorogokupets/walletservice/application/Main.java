@@ -48,7 +48,6 @@ public class Main {
             prop.getProperty("db.password")
     );
   }
-//
 //  private static Logger logger = LogManager.getLogger();
 //  static ClientRepository clientRepository = new ClientRepositoryImpl(dbProperties);
 //  static TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository, dbProperties);

@@ -19,16 +19,12 @@ import java.util.*;
  */
 public class ClientServiceImpl implements ClientService {
 
-  private ConsoleInput consoleInput;
   private ClientRepository clientRepository;
 
-  public ClientServiceImpl() {
-  }
-
-  public ClientServiceImpl(ConsoleInput consoleInput, ClientRepository clientRepository) {
-    this.consoleInput = consoleInput;
+  public ClientServiceImpl(ClientRepository clientRepository) {
     this.clientRepository = clientRepository;
   }
+
   @Override
   public boolean register(ClientRegistrationDto clientRegistrationDTO) throws RepositoryException {
     String login = clientRegistrationDTO.getLogin();
@@ -87,23 +83,6 @@ public class ClientServiceImpl implements ClientService {
 //      return false;
 //    }
 //  }
-
-  private Client createClientFromUserInput(String login) {
-    System.out.print("Введите пароль: ");
-    String password = consoleInput.readString();
-    System.out.print("Введите имя: ");
-    String firstName = consoleInput.readString();
-    System.out.print("Введите фамилию: ");
-    String lastName = consoleInput.readString();
-    Client client = new Client();
-    client.setLogin(login);
-    String encodedPassword = PasswordEncoder.encode(password);
-    client.setPassword(encodedPassword);
-    client.setClientFirstName(firstName);
-    client.setClientLastName(lastName);
-    client.setBalance(BigDecimal.valueOf(0));
-    return client;
-  }
 
   @Override
   public Optional<Client> findClientByLogin(String login) throws ServiceException {
