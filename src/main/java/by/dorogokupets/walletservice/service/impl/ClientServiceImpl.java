@@ -1,5 +1,6 @@
 package by.dorogokupets.walletservice.service.impl;
 
+import by.dorogokupets.walletservice.infrastructure.out.mapper.ClientMapper;
 import domain.dto.ClientRegistrationDto;
 import domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
@@ -43,15 +44,34 @@ public class ClientServiceImpl implements ClientService {
   }
 
   private Client createClientFromRegistrationDTO(ClientRegistrationDto clientRegistrationDTO) {
-    Client client = new Client();
-    client.setLogin(clientRegistrationDTO.getLogin());
-    String encodedPassword = PasswordEncoder.encode(clientRegistrationDTO.getPassword());
-    client.setPassword(encodedPassword);
-    client.setClientFirstName(clientRegistrationDTO.getClientFirstName());
-    client.setClientLastName(clientRegistrationDTO.getClientLastName());
+    Client client = ClientMapper.MAPPER.mapToClient(clientRegistrationDTO);
     client.setBalance(BigDecimal.valueOf(0));
     return client;
   }
+//  @Override
+//  public boolean register(ClientRegistrationDto clientRegistrationDTO) throws RepositoryException {
+//    String login = clientRegistrationDTO.getLogin();
+//    if (clientRepository.findClientByLogin(login).isPresent()) {
+//      Client client = createClientFromRegistrationDTO(clientRegistrationDTO);
+//      clientRepository.add(client);
+//      System.out.println("Регистрация выполнена успешно. Выполните вход.");
+//      return true;
+//    } else {
+//      System.out.println("Клиент с таким логином уже существует!");
+//      return false;
+//    }
+//  }
+//
+//  private Client createClientFromRegistrationDTO(ClientRegistrationDto clientRegistrationDTO) {
+//    Client client = new Client();
+//    client.setLogin(clientRegistrationDTO.getLogin());
+//    String encodedPassword = PasswordEncoder.encode(clientRegistrationDTO.getPassword());
+//    client.setPassword(encodedPassword);
+//    client.setClientFirstName(clientRegistrationDTO.getClientFirstName());
+//    client.setClientLastName(clientRegistrationDTO.getClientLastName());
+//    client.setBalance(BigDecimal.valueOf(0));
+//    return client;
+//  }
 
 //  @Override
 //  public boolean register() throws RepositoryException {
