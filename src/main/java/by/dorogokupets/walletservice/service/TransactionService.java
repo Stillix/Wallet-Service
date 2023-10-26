@@ -1,6 +1,7 @@
 package by.dorogokupets.walletservice.service;
 
 
+import domain.dto.TransactionDto;
 import domain.entity.Client;
 import domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.ServiceException;
@@ -13,7 +14,9 @@ import java.util.List;
  */
 public interface TransactionService {
 
-    /**
+  boolean processTransaction(TransactionDto transactionDto) throws ServiceException;
+
+  /**
      * Perform a debit transaction, withdrawing a specified amount from a client's account.
      *
      * @param client        The client for whom the transaction is performed.

@@ -1,5 +1,7 @@
 package by.dorogokupets.walletservice.service.impl;
 
+import by.dorogokupets.walletservice.validator.TransactionValidator;
+import domain.dto.TransactionDto;
 import domain.entity.Client;
 import domain.entity.Transaction;
 import domain.enums.TransactionType;
@@ -13,17 +15,37 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of the TransactionService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.
  */
 public class TransactionServiceImpl implements TransactionService {
-  private TransactionRepository transactionRepository;
-  private ClientRepository clientRepository;
+  private final TransactionRepository transactionRepository;
+  private final ClientRepository clientRepository;
 
   public TransactionServiceImpl(TransactionRepository transactionRepository, ClientRepository clientRepository) {
     this.transactionRepository = transactionRepository;
     this.clientRepository = clientRepository;
+  }
+
+  @Override
+  public boolean processTransaction(TransactionDto transactionDto) throws ServiceException {
+
+    Optional<Client> clientOptional;
+    try {
+      clientOptional = clientRepository.findClientById(transactionDto.getClientId());
+    } catch (RepositoryException e) {
+      throw new ServiceException(e);
+    }
+    Client client = clientOptional.get();
+
+    if (transactionDto.getType() == TransactionType.DEBIT) {
+      return this.debit(client, transactionDto.getAmount());
+    } else if (transactionDto.getType() == TransactionType.CREDIT) {
+      return this.credit(client, transactionDto.getAmount());
+    }
+    return false;
   }
 
   @Override

@@ -1,5 +1,6 @@
 package by.dorogokupets.walletservice.service.impl;
 
+import domain.dto.ClientRegistrationDto;
 import domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
@@ -27,13 +28,11 @@ public class ClientServiceImpl implements ClientService {
     this.consoleInput = consoleInput;
     this.clientRepository = clientRepository;
   }
-
   @Override
-  public boolean register() throws RepositoryException {
-    System.out.print("Введите логин: ");
-    String login = consoleInput.readString();
-    if (clientRepository.findClientByLogin(login).isEmpty()) {
-      Client client = createClientFromUserInput(login);
+  public boolean register(ClientRegistrationDto clientRegistrationDTO) throws RepositoryException {
+    String login = clientRegistrationDTO.getLogin();
+    if (clientRepository.findClientByLogin(login).isPresent()) {
+      Client client = createClientFromRegistrationDTO(clientRegistrationDTO);
       clientRepository.add(client);
       System.out.println("Регистрация выполнена успешно. Выполните вход.");
       return true;
@@ -42,6 +41,32 @@ public class ClientServiceImpl implements ClientService {
       return false;
     }
   }
+
+  private Client createClientFromRegistrationDTO(ClientRegistrationDto clientRegistrationDTO) {
+    Client client = new Client();
+    client.setLogin(clientRegistrationDTO.getLogin());
+    String encodedPassword = PasswordEncoder.encode(clientRegistrationDTO.getPassword());
+    client.setPassword(encodedPassword);
+    client.setClientFirstName(clientRegistrationDTO.getClientFirstName());
+    client.setClientLastName(clientRegistrationDTO.getClientLastName());
+    client.setBalance(BigDecimal.valueOf(0));
+    return client;
+  }
+
+//  @Override
+//  public boolean register() throws RepositoryException {
+//    System.out.print("Введите логин: ");
+//    String login = consoleInput.readString();
+//    if (clientRepository.findClientByLogin(login).isEmpty()) {
+//      Client client = createClientFromUserInput(login);
+//      clientRepository.add(client);
+//      System.out.println("Регистрация выполнена успешно. Выполните вход.");
+//      return true;
+//    } else {
+//      System.out.println("Клиент с таким логином уже существует!");
+//      return false;
+//    }
+//  }
 
   private Client createClientFromUserInput(String login) {
     System.out.print("Введите пароль: ");
@@ -79,11 +104,7 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
-  public Optional<Client> authenticate() throws ServiceException {
-    System.out.print("Введите логин: ");
-    String login = consoleInput.readString();
-    System.out.print("Введите пароль: ");
-    String password = consoleInput.readString();
+  public Optional<Client> authenticate(String login, String password) throws ServiceException {
     Optional<Client> client = this.findClientByLogin(login);
     String encodedPassword = PasswordEncoder.encode(password);
     if (client.isPresent() && StringUtils.equals(client.get().getPassword(), encodedPassword)) {

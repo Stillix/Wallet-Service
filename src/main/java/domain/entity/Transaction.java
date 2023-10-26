@@ -1,6 +1,10 @@
 package domain.entity;
 
 import domain.enums.TransactionType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -10,6 +14,7 @@ import java.util.Objects;
 /**
  * Class representing a financial transaction associated with a client account.
  */
+
 public class Transaction {
   private int transactionId;
   private BigDecimal amount;
@@ -35,18 +40,6 @@ public class Transaction {
     this.transactionId = transactionId;
   }
 
-  public void setClient(Client client) {
-    this.client = client;
-  }
-
-  public void setType(TransactionType type) {
-    this.type = type;
-  }
-
-  public void setTimestamp(Timestamp timestamp) {
-    this.timestamp = timestamp;
-  }
-
   public BigDecimal getAmount() {
     return amount;
   }
@@ -59,12 +52,24 @@ public class Transaction {
     return client;
   }
 
+  public void setClient(Client client) {
+    this.client = client;
+  }
+
   public TransactionType getType() {
     return type;
   }
 
+  public void setType(TransactionType type) {
+    this.type = type;
+  }
+
   public Timestamp getTimestamp() {
     return timestamp;
+  }
+
+  public void setTimestamp(Timestamp timestamp) {
+    this.timestamp = timestamp;
   }
 
   @Override
