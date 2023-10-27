@@ -1,58 +1,37 @@
 package by.dorogokupets.walletservice.infrastructure.in.servlet;
 
-import by.dorogokupets.walletservice.aop.annotation.Loggable;
 import by.dorogokupets.walletservice.exception.ServiceException;
-import by.dorogokupets.walletservice.repository.ClientRepository;
-import by.dorogokupets.walletservice.repository.TransactionRepository;
-import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
-import by.dorogokupets.walletservice.repository.impl.TransactionRepositoryImpl;
 import by.dorogokupets.walletservice.service.TransactionService;
-import by.dorogokupets.walletservice.service.impl.TransactionServiceImpl;
-import by.dorogokupets.walletservice.util.DbConfig;
 import by.dorogokupets.walletservice.validator.TransactionValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import by.dorogokupets.walletservice.domain.dto.TransactionDto;
-import by.dorogokupets.walletservice.domain.entity.DBProperties;
-import jakarta.servlet.ServletConfig;
+import  by.dorogokupets.walletservice.domain.dto.TransactionDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
-@Loggable
 @WebServlet("/wallet/transaction")
-public class TransactionServlet extends HttpServlet {
-  private static Logger logger = LogManager.getLogger();
-  private TransactionService transactionService;
-  private TransactionValidator transactionValidator;
-  private static final ObjectMapper objectMapper = new ObjectMapper();
+public class TransactionServlet extends AbstractServlet {
+  private final ObjectMapper objectMapper;
+  private final TransactionService transactionService;
+  private final TransactionValidator transactionValidator;
 
-  @Override
-  public void init() {
-    ClientRepository clientRepository = new ClientRepositoryImpl(DbConfig.dbProperties);
-    TransactionRepository transactionRepository = new TransactionRepositoryImpl(clientRepository, DbConfig.dbProperties);
-    transactionValidator = new TransactionValidator();
-    transactionService = new TransactionServiceImpl(transactionRepository, clientRepository);
+  public TransactionServlet(TransactionService transactionService, TransactionValidator transactionValidator) {
+    this.transactionValidator = transactionValidator;
+    this.objectMapper = new ObjectMapper();
+    this.transactionService = transactionService;
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     TransactionDto transactionDTO = objectMapper.readValue(req.getReader(), TransactionDto.class);
 
     if (!transactionValidator.isValidAmount(transactionDTO.getAmount())) {
-      logger.log(Level.INFO, "Validation failed");
-      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      resp.getWriter().write("Validation failed");
+      writeJsonResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "{\"message\" : \"Validation failed\"}");
       return;
     }
 
@@ -60,16 +39,14 @@ public class TransactionServlet extends HttpServlet {
     try {
       transactionSuccessful = transactionService.processTransaction(transactionDTO);
     } catch (ServiceException e) {
-      logger.log(Level.INFO, "Транзакция не проведена");
+      writeJsonResponse(resp, HttpServletResponse.SC_CREATED, "{\"message\" : \"Internal Server Error\"}");
+      return;
     }
     if (transactionSuccessful) {
-      logger.log(Level.INFO, "Transaction successful");
-      resp.setStatus(HttpServletResponse.SC_CREATED);
-      resp.getWriter().write("Transaction successful");
+      writeJsonResponse(resp, HttpServletResponse.SC_CREATED, "{\"message\" : \"Transaction successful\"}");
     } else {
-      logger.log(Level.INFO, "Transaction failed");
-      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      resp.getWriter().write("Transaction failed");
+      writeJsonResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "{\"message\" : \"Transaction failed\" }");
     }
   }
+
 }
