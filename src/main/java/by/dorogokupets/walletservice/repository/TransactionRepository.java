@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.repository;
 
 
-import domain.entity.Transaction;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.util;
 
 import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
-import domain.entity.DBProperties;
+import by.dorogokupets.walletservice.domain.entity.DBProperties;
 
 import java.io.IOException;
 import java.io.InputStream;

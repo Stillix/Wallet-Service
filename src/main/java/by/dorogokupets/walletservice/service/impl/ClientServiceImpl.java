@@ -1,11 +1,10 @@
 package by.dorogokupets.walletservice.service.impl;
 
 import by.dorogokupets.walletservice.infrastructure.out.mapper.ClientMapper;
-import domain.dto.ClientRegistrationDto;
-import domain.entity.Client;
+import by.dorogokupets.walletservice.domain.dto.ClientRegistrationDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
-import by.dorogokupets.walletservice.infrastructure.in.input.ConsoleInput;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.service.ClientService;
 import by.dorogokupets.walletservice.util.PasswordEncoder;

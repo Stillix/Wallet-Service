@@ -1,4 +1,4 @@
-package domain.entity;
+package by.dorogokupets.walletservice.domain.entity;
 
 import domain.enums.TransactionType;
 import lombok.AllArgsConstructor;

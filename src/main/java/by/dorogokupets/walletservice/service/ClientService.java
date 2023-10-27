@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.service;
 
-import domain.dto.ClientRegistrationDto;
-import domain.entity.Client;
+import by.dorogokupets.walletservice.domain.dto.ClientRegistrationDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 

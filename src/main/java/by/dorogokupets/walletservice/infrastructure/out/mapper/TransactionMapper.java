@@ -1,7 +1,7 @@
 package by.dorogokupets.walletservice.infrastructure.out.mapper;
 
-import domain.dto.TransactionDto;
-import domain.entity.Transaction;
+import by.dorogokupets.walletservice.domain.dto.TransactionDto;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,4 +1,4 @@
-package domain.dto;
+package by.dorogokupets.walletservice.domain.dto;
 
 import lombok.*;
 

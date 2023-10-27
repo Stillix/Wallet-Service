@@ -1,4 +1,4 @@
-package domain.entity;
+package by.dorogokupets.walletservice.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

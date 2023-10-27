@@ -1,6 +1,6 @@
 package by.dorogokupets.walletservice.repository;
 
-import domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 
 import java.math.BigDecimal;

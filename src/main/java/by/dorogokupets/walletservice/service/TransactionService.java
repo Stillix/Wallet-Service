@@ -1,9 +1,9 @@
 package by.dorogokupets.walletservice.service;
 
 
-import domain.dto.TransactionDto;
-import domain.entity.Client;
-import domain.entity.Transaction;
+import by.dorogokupets.walletservice.domain.dto.TransactionDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.ServiceException;
 
 import java.math.BigDecimal;

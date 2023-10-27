@@ -1,9 +1,8 @@
 package by.dorogokupets.walletservice.service.impl;
 
-import by.dorogokupets.walletservice.validator.TransactionValidator;
-import domain.dto.TransactionDto;
-import domain.entity.Client;
-import domain.entity.Transaction;
+import by.dorogokupets.walletservice.domain.dto.TransactionDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
 import domain.enums.TransactionType;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;

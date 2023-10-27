@@ -1,4 +1,4 @@
-package domain.entity;
+package by.dorogokupets.walletservice.domain.entity;
 
 /**
  * Transfer object to store properties to connect to DB
