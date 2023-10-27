@@ -2,8 +2,8 @@ package by.dorogokupets.walletservice.infrastructure.in.servlet;
 
 import by.dorogokupets.walletservice.service.ClientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import domain.dto.ClientAuthenticationDto;
-import domain.entity.Client;
+import by.dorogokupets.walletservice.domain.dto.ClientAuthenticationDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

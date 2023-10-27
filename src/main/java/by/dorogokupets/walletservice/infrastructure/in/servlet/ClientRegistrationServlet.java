@@ -2,7 +2,7 @@ package by.dorogokupets.walletservice.infrastructure.in.servlet;
 
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.service.ClientService;
-import domain.dto.ClientRegistrationDto;
+import by.dorogokupets.walletservice.domain.dto.ClientRegistrationDto;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
