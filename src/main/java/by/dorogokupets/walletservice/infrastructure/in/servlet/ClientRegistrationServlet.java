@@ -30,7 +30,6 @@ import org.apache.logging.log4j.Logger;
 public class ClientRegistrationServlet extends HttpServlet {
   private static Logger logger = LogManager.getLogger();
   private final ObjectMapper objectMapper = new ObjectMapper();
-
   private ClientService clientService;
 
   public ClientRegistrationServlet() {
