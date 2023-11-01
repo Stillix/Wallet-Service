@@ -1,33 +1,50 @@
 package by.dorogokupets.walletservice.service.impl;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
-import by.dorogokupets.walletservice.entity.TransactionType;
+import by.dorogokupets.walletservice.domain.dto.TransactionDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
+import domain.enums.TransactionType;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.repository.TransactionRepository;
-import by.dorogokupets.walletservice.repository.impl.ClientRepositoryImpl;
-import by.dorogokupets.walletservice.repository.impl.TransactionRepositoryImpl;
 import by.dorogokupets.walletservice.service.TransactionService;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 /**
  * Implementation of the TransactionService interface. A service class for handling client operations, such as registration, authentication, and balance retrieval.
  */
 public class TransactionServiceImpl implements TransactionService {
-  private TransactionRepository transactionRepository;
-  private ClientRepository clientRepository;
+  private final TransactionRepository transactionRepository;
+  private final ClientRepository clientRepository;
 
   public TransactionServiceImpl(TransactionRepository transactionRepository, ClientRepository clientRepository) {
     this.transactionRepository = transactionRepository;
     this.clientRepository = clientRepository;
+  }
+
+  @Override
+  public boolean processTransaction(TransactionDto transactionDto) throws ServiceException {
+
+    Optional<Client> clientOptional;
+    try {
+      clientOptional = clientRepository.findClientById(transactionDto.getClientId());
+    } catch (RepositoryException e) {
+      throw new ServiceException(e);
+    }
+    Client client = clientOptional.get();
+
+    if (transactionDto.getType() == TransactionType.DEBIT) {
+      return this.debit(client, transactionDto.getAmount());
+    } else if (transactionDto.getType() == TransactionType.CREDIT) {
+      return this.credit(client, transactionDto.getAmount());
+    }
+    return false;
   }
 
   @Override

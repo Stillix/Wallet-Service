@@ -1,20 +1,22 @@
 package by.dorogokupets.walletservice.service;
 
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.Transaction;
+import by.dorogokupets.walletservice.domain.dto.TransactionDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
 import by.dorogokupets.walletservice.exception.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * An interface representing the service for managing financial transactions.
  */
 public interface TransactionService {
 
-    /**
+  boolean processTransaction(TransactionDto transactionDto) throws ServiceException;
+
+  /**
      * Perform a debit transaction, withdrawing a specified amount from a client's account.
      *
      * @param client        The client for whom the transaction is performed.

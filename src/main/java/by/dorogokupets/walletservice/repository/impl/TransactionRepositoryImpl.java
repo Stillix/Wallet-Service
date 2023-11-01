@@ -1,15 +1,13 @@
 package by.dorogokupets.walletservice.repository.impl;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.DBProperties;
-import by.dorogokupets.walletservice.entity.Transaction;
-import by.dorogokupets.walletservice.entity.TransactionType;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.DBProperties;
+import by.dorogokupets.walletservice.domain.entity.Transaction;
+import domain.enums.TransactionType;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 import by.dorogokupets.walletservice.repository.TransactionRepository;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 

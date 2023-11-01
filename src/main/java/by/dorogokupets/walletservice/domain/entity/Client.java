@@ -1,4 +1,9 @@
-package by.dorogokupets.walletservice.entity;
+package by.dorogokupets.walletservice.domain.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -6,6 +11,7 @@ import java.util.Objects;
 /**
  * A class representing a client's account.
  */
+
 public class Client {
   private int clientId;
   private String clientFirstName;
@@ -15,14 +21,6 @@ public class Client {
   private String password;
 
   public Client() {
-  }
-
-  public Client(String clientFirstName, String clientLastName, BigDecimal balance, String login, String password) {
-    this.clientFirstName = clientFirstName;
-    this.clientLastName = clientLastName;
-    this.balance = balance;
-    this.login = login;
-    this.password = password;
   }
 
   public int getClientId() {
@@ -45,16 +43,16 @@ public class Client {
     return clientLastName;
   }
 
+  public void setClientLastName(String clientLastName) {
+    this.clientLastName = clientLastName;
+  }
+
   public BigDecimal getBalance() {
     return balance;
   }
 
   public void setBalance(BigDecimal balance) {
     this.balance = balance;
-  }
-
-  public void setClientLastName(String clientLastName) {
-    this.clientLastName = clientLastName;
   }
 
   public String getLogin() {

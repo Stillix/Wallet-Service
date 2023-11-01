@@ -1,4 +1,4 @@
-package by.dorogokupets.walletservice.entity;
+package domain.enums;
 
 /**
  * An enumeration representing types of financial transactions.

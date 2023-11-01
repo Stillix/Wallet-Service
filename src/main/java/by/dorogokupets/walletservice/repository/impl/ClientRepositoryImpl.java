@@ -1,13 +1,14 @@
 package by.dorogokupets.walletservice.repository.impl;
 
-import by.dorogokupets.walletservice.entity.Client;
-import by.dorogokupets.walletservice.entity.DBProperties;
+import by.dorogokupets.walletservice.domain.entity.Client;
+import by.dorogokupets.walletservice.domain.entity.DBProperties;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.repository.ClientRepository;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Optional;
+
 /**
  * Implementation of the ClientRepository interface.
  */

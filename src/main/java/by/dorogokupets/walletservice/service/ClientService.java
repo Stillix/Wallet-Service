@@ -1,6 +1,7 @@
 package by.dorogokupets.walletservice.service;
 
-import by.dorogokupets.walletservice.entity.Client;
+import by.dorogokupets.walletservice.domain.dto.ClientRegistrationDto;
+import by.dorogokupets.walletservice.domain.entity.Client;
 import by.dorogokupets.walletservice.exception.RepositoryException;
 import by.dorogokupets.walletservice.exception.ServiceException;
 
@@ -17,7 +18,7 @@ public interface ClientService {
      *
      * @return true if the registration is successful, false otherwise.
      */
-    boolean register() throws RepositoryException;
+    boolean register(ClientRegistrationDto clientRegistrationDTO) throws RepositoryException;
 
     /**
      * Find a client by their login.
@@ -34,7 +35,7 @@ public interface ClientService {
      *
      * @return Client     The authenticated client, or null if authentication fails.
      */
-    Optional<Client> authenticate() throws ServiceException;
+    Optional<Client> authenticate(String login, String password) throws ServiceException;
 
     /**
      * Get the balance of a client.

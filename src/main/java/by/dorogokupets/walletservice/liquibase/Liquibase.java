@@ -11,6 +11,10 @@ import java.util.Properties;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Migrations
+ *
+ */
 public class Liquibase {
   public static void runMigrations() {
     try {
