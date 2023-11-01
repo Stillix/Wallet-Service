@@ -1,11 +1,8 @@
 package by.dorogokupets.walletservice.domain.dto;
 
 import domain.enums.TransactionType;
-import lombok.*;
-
 
 import java.math.BigDecimal;
-
 
 public class TransactionDto {
 

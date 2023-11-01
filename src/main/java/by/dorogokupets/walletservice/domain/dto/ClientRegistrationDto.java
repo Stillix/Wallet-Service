@@ -1,9 +1,5 @@
 package by.dorogokupets.walletservice.domain.dto;
 
-import lombok.*;
-
-
-
 public class ClientRegistrationDto {
   private String login;
   private String password;

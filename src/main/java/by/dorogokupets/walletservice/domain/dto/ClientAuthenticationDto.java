@@ -1,6 +1,5 @@
 package by.dorogokupets.walletservice.domain.dto;
 
-
 public class ClientAuthenticationDto {
   private String login;
   private String password;

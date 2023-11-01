@@ -1,6 +1,6 @@
 package by.dorogokupets.walletservice.validator;
 
-import domain.dto.ClientRegistrationDto;
+import by.dorogokupets.walletservice.domain.dto.ClientRegistrationDto;
 
 public class ClientValidator {
   public static final String LOGIN_REGEX = "^[a-zA-Z0-9]{4,20}$";
